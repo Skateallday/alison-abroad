@@ -17,3 +17,13 @@ padding-bottom: 30px;
     background-color: #ffede4;
     color:#fff;
 }
+
+.links a{
+    text-decoration: none;
+  }
+
+
+  a:hover, a:visited, a:link, a:active
+{
+    text-decoration: none!important;
+}
