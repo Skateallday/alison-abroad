@@ -7,6 +7,9 @@
 padding-bottom: 30px;
 }
 
+#headline{
+font-family: 'Dancing Script', cursive;
+}
 
 .footer{
     background: #FFD8D6;
@@ -26,4 +29,12 @@ padding-bottom: 30px;
   a:hover, a:visited, a:link, a:active
 {
     text-decoration: none!important;
+}
+
+#Wales, #England, #WHW, #Munros{
+    transition: transform .4s; /* Animation */
+}
+#Wales:hover, #England:hover, #WHW:hover, #Munros:hover{
+    z-index: 2;
+    transform: scale(1.5);
 }

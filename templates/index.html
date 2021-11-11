@@ -14,8 +14,8 @@
   
         <section class="hero">
           <div class="hero-body">
-            <h1 class="title is-size-1	">Alison Abroad</h1>
-            <h2 class="subtitle is-size-4		">A place to see all the wonderful things that Alison has seen.</p>
+            <h1 id="Headline" class="title is-size-1">Alison Abroad</h1>
+            <h2 class="subtitle is-size-4	">A place to see all the wonderful things that Alison has seen.</p>
           </div>
         </section>
         
@@ -25,7 +25,7 @@
             <div class="tile">
               <div class="tile is-parent is-vertical">
                 
-                <article class="tile is-child notification is-primary">
+                <article id="Wales" class="tile is-child notification is-primary">
                   <a class="links" href={{url_for ('wales')}}>
                     <p class="title links">Wales</p>
                     <p class="subtitle">Rugged Coastline, beautiful valleys, House-Elf graves and Cardiff*.</p>
@@ -35,7 +35,7 @@
     
       
 
-                <article class="tile is-child notification is-warning">
+                <article id="England" class="tile is-child notification is-warning">
                   <a href={{url_for ('england')}}> 
                     <p class="title">England</p>
                     <p class="subtitle">The Lake District to Brighton.</p>
@@ -44,7 +44,7 @@
 
               </div>
               <div class="tile is-parent">
-                <article class="tile is-child notification is-info">
+                <article id="WHW" class="tile is-child notification is-info">
                   <a href={{url_for('WHW')}}>
                   <p class="title">West Highland Way</p>
                   <p class="subtitle">Milngavie to Fort William by foot</p>
@@ -55,7 +55,7 @@
               </div>
             </div>
             <div class="tile is-parent">
-              <article class="tile is-child notification is-danger">
+              <article id="Munros" class="tile is-child notification is-danger">
                 <a href={{url_for('munros')}}>
                 <p class="title">The Munros</p>
                 <p class="subtitle">Scotland's exclusive 914.4 meter or higher club</p>
