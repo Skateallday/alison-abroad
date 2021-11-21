@@ -13,7 +13,86 @@
 
 
 
-    <section class="hero is-warning">
+    <section class="hero is-warning">{% extends "template.html" %}
+
+      {% block content %}
+      
+            {% for message in get_flashed_messages() %}
+            <div class="alert alert-warning">
+                <button type="button" class="close" data-dismiss="alert">
+                  &times;
+                </button>
+                {{ message }}
+            </div>
+          {% endfor %}
+      
+      
+      
+          <section class="hero is-primary">
+            <div class="hero-body">
+              <p class="title">
+                The Scottish Munros
+            </p>
+              <p class="subtitle">
+      8/282              </p>
+            </div>
+          </section>
+          <section class="section is-medium">
+            <h1 class="title">The best of the Highlands</h1>
+            <h2 class="subtitle">
+              During her time in Scotland, Alison has climbed many hills. 
+            </h2>
+            <div class="tile is-ancestor">
+                <div class="tile is-vertical is-8">
+                  <div class="tile">
+                    <div class="tile is-parent is-vertical">
+                      <article class="tile is-child notification is-primary">
+                        <img src={{url_for('static', filename='images/AlisonLochLochy.jpg')}}>
+                      </article>
+                      <article class="tile is-child notification is-primary">
+                        <img src={{url_for('static', filename='images/AlisonLochLochy3.jpg')}}>
+      
+                      </article>
+                    </div>
+                    <div class="tile is-parent">
+                      <article class="tile is-child notification is-primary">
+      
+                            <img src={{url_for('static', filename='images/AlisonLochLochy2.jpg')}}>
+                            <br><br>
+                            <img src={{url_for('static', filename='images/AlisonLochLochy2.jpg')}}><br><br>
+      
+                            <img src={{url_for('static', filename='images/AlisonLochLochy2.jpg')}}>
+      
+                      </article>
+                    </div>
+                  </div>
+                  <div class="tile is-parent">
+                    <article class="tile is-child notification is-primary">
+                      <p class="title">Loch Locky</p>
+                      <p class="subtitle">Two fantastic Munros</p>
+                      <div class="content">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi quisquam placeat laborum! Magnam quaerat ipsum aut? Qui dicta, quos repellendus totam, voluptate ratione numquam earum sapiente molestiae eaque, provident rem?
+                      </div>
+                    </article>
+                  </div>
+                </div>
+                <div class="tile is-parent">
+                  <article class="tile is-child notification is-primary">
+                    <div class="content">
+                        <img src={{url_for('static', filename='images/MarcLochLochy.jpg')}}>
+                        <br><br>
+                        <img src={{url_for('static', filename='images/AlisonTarmachan.jpg')}}><br><br>
+      
+                        <img src={{url_for('static', filename='images/BothTarmachan.jpg')}}>
+                    </div>
+                  </article>
+                </div>
+              </div>
+      
+      
+          </section>
+      
+      {% endblock %}
       <div class="hero-body">
         <p class="title">
           The Scottish Munros
