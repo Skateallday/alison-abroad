@@ -31,6 +31,22 @@ def munros():
         return render_template("munros.html")
 
 
+@app.route('/admin/', methods=['GET', 'POST'])
+def admin():
+
+        return render_template("admin/adminLogin.html")
+
+
+@app.route('/createpost/', methods=['GET', 'POST'])
+def createpost():
+
+        return render_template("admin/createPost.html")
+
+@app.route('/adminDashboard/', methods=['GET', 'POST'])
+def adminDashboard():
+
+        return render_template("admin/adminDashboard.html")
+        
 
 if __name__ == "__main__":
       app.run('localhost', 5000, debug=True)
