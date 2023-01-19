@@ -70,7 +70,7 @@ export default function NavBar() {
                             <Link to='/blog'>Blog</Link>
                             </li>
                             <li className="text-gray-600 hover:text-blue-600">
-                            <Link to='/About-Us'>About Us</Link>
+                            <Link to='/image-gallery'>Image Gallery</Link>
                             </li>
                             <li className="text-gray-600 hover:text-blue-600">
                             <Link to='/Contact-Us'>Contact Us</Link>
