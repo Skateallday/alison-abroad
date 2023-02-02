@@ -1,8 +1,8 @@
 import { Gallery } from "react-grid-gallery";
-import { ImagesProps } from '../interfaces/images'
+import { Country } from '../interfaces/country'
 
 
-export default function Images(props: ImagesProps) {
+export default function Images(props: Country) {
 
     const country = props.country;
 

@@ -1,3 +1,8 @@
 export interface ImagesProps {
-    country: string;
+    src : string,
+    width: number,
+    height: number,
+    country: string,
+    subregion: string,
+    caption: string
 }
