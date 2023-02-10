@@ -29,14 +29,15 @@ export default class CreateImage extends Component <any, any> {
     componentDidMount() {
         this.setState({
             users: ['test user'],
-            username: 'jamfish'
+            username: 'Jamfish'
         })
         
     }
 
     onChangeSrc(e: React.ChangeEvent<any>) {
+        const file = e.target.files[0]
         this.setState({
-            src: e.target.value
+            src: file.name                       
         });
     }
     onChangeWidth(e: React.ChangeEvent<any>) {
@@ -67,8 +68,7 @@ export default class CreateImage extends Component <any, any> {
 
     onSubmit(e: React.ChangeEvent<any>) {
         e.preventDefault();
-
-        
+        try {
 
         let image : ImagesProps = {
             src : this.state.src,
@@ -79,18 +79,25 @@ export default class CreateImage extends Component <any, any> {
             caption: this.state.caption
         };
     console.log(image);
+    
+
 
     axios.post('http://localhost:5000/images/add', image)
   .then(res => console.log(res.data));
 
     }
+ 
+catch (error: any) {
+        console.log(error)
+    }
+}
 
   render() {
     return (
       <div>
         <h3> Create New Image</h3>
 
-        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={this.onSubmit}>
+        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={this.onSubmit} encType='multipart/form-data'>
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2">
                     Source:
@@ -98,8 +105,9 @@ export default class CreateImage extends Component <any, any> {
                     <input 
                         required
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
-                        type="text" 
-                        value={this.state.src}
+                        type="file" 
+                        accept=".png, .jpg, .jpeg"
+                        value={this.state.srcName}
                         onChange={this.onChangeSrc}
                     />
                 </div>
