@@ -71,6 +71,7 @@ export default class CreateImage extends Component <any, any> {
         try {
 
         let image : ImagesProps = {
+            _id: "",
             src : this.state.src,
             width: this.state.width,
             height: this.state.height,

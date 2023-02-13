@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Gallery } from "react-grid-gallery";
 import Images from "./gallery"
+import ImagesList   from "./list-image"
 
 
 const ImageGallery = () => {
@@ -25,9 +26,15 @@ const ImageGallery = () => {
         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni minus repellendus labore natus ut, sint accusantium similique sit nulla molestias perspiciatis non minima repudiandae sequi omnis maxime aspernatur maiores earum.</p>
        </div>
        <div className="justify-center text-left p-10">  
-        <Images country={ country }/>
         </div>
        </div>
+       <div className="grid grid-cols-1 md:grid-cols-2">
+        <div className="justify-center text-left p-10"> 
+        <ImagesList />
+        </div></div>
+
+
+
        </div>
  
 
