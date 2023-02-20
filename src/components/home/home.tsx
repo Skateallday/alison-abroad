@@ -21,7 +21,7 @@ function Home() {
       </div>
       </header>
       <main>
-        <div className="orange">
+        <div className="bg-orange-600	bg-cover">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae facere error, aperiam delectus saepe vitae enim ut labore culpa amet laudantium cum optio ea ipsum odio quasi similique quos vel.
         </div>
       </main>

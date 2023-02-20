@@ -42,7 +42,7 @@ export default class ImagesList extends Component {
     return (
       <div>
         <h3>Logged images</h3>
-        <table className="table">
+        <table className="table table-auto	">
           <thead className="thead-light">
             <tr>
               <th>Source</th>

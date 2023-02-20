@@ -9,7 +9,7 @@ export default class CreateImage extends Component <any, any> {
         super(props);
 
         this.state = {
-            src : String ,
+            src : String,
             width : Number,
             height: Number,
             country : String,
@@ -17,7 +17,6 @@ export default class CreateImage extends Component <any, any> {
             caption : String
         }
 
-        this.onChangeSrc = this.onChangeSrc.bind(this);
         this.onChangeWidth = this.onChangeWidth.bind(this);
         this.onChangeHeight = this.onChangeHeight.bind(this);
         this.onChangeCountry = this.onChangeCountry.bind(this);
@@ -34,12 +33,7 @@ export default class CreateImage extends Component <any, any> {
         
     }
 
-    onChangeSrc(e: React.ChangeEvent<any>) {
-        const file = e.target.files[0]
-        this.setState({
-            src: file.name                       
-        });
-    }
+
     onChangeWidth(e: React.ChangeEvent<any>) {
         this.setState({
             width: parseInt(e.target.value)
@@ -68,37 +62,30 @@ export default class CreateImage extends Component <any, any> {
 
     onSubmit(e: React.ChangeEvent<any>) {
         e.preventDefault();
-        try {
+        const formData = new FormData();
+        formData.append('width', this.state.width);
+        formData.append('height', this.state.height);
+        formData.append('country', this.state.country);
+        formData.append('subregion', this.state.subregion);
+        formData.append('caption', this.state.caption);
 
-        let image : ImagesProps = {
-            _id: "",
-            src : this.state.src,
-            width: this.state.width,
-            height: this.state.height,
-            country: this.state.country,
-            subregion: this.state.subregion,
-            caption: this.state.caption
-        };
-    console.log(image);
-    
-
-
-    axios.post('http://localhost:5000/images/add', image)
-  .then(res => console.log(res.data));
-
+        axios
+            .post('http://localhost:5000/images/add', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            })
+            .then(res => console.log(res.data));
     }
- 
-catch (error: any) {
-        console.log(error)
-    }
-}
 
   render() {
     return (
       <div>
         <h3> Create New Image</h3>
 
-        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={this.onSubmit} encType='multipart/form-data'>
+        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" 
+            onSubmit={this.onSubmit} 
+            encType='multipart/form-data'>
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2">
                     Source:
@@ -107,9 +94,9 @@ catch (error: any) {
                         required
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                         type="file" 
+                        name='src'
                         accept=".png, .jpg, .jpeg"
                         value={this.state.srcName}
-                        onChange={this.onChangeSrc}
                     />
                 </div>
                 <div className="mb-4">
@@ -120,6 +107,7 @@ catch (error: any) {
                         required
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                         type="text" 
+                        name='width'
                         value={this.state.width}
                         onChange={this.onChangeWidth}
                     />
@@ -132,6 +120,7 @@ catch (error: any) {
                         required
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                         type="text" 
+                        name='height'
                         value={this.state.height}
                         onChange={this.onChangeHeight}
                     />
@@ -156,6 +145,7 @@ catch (error: any) {
                         required
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                         type="text" 
+                        name='subregion'
                         value={this.state.subregion}
                         onChange={this.onChangeSubregion}
                     />
@@ -168,6 +158,7 @@ catch (error: any) {
                         required
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                         type="text" 
+                        name='caption'
                         value={this.state.caption}
                         onChange={this.onChangeCaption}
                     />
