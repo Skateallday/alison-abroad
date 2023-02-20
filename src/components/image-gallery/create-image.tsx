@@ -63,11 +63,13 @@ export default class CreateImage extends Component <any, any> {
     onSubmit(e: React.ChangeEvent<any>) {
         e.preventDefault();
         const formData = new FormData();
+        formData.append('src', e.target.elements.src.files[0]);
         formData.append('width', this.state.width);
         formData.append('height', this.state.height);
         formData.append('country', this.state.country);
         formData.append('subregion', this.state.subregion);
         formData.append('caption', this.state.caption);
+
 
         axios
             .post('http://localhost:5000/images/add', formData, {
