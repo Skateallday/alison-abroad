@@ -49,5 +49,11 @@ router.route('/add').post(upload.array('src'), (req, res) => {
     .catch(err => res.status(400).json({ error: err.message }));
 });
 
+router.get('/images/:filename', (req, res) => {
+  const filename = req.params.filename;
+  const filepath = path.join(__dirname, '../images', filename);
+  res.sendFile(filepath);
+});
+
 
 module.exports = router;
