@@ -5,7 +5,9 @@ import Home from '../home/home';
 import ImageGallery from '../image-gallery/image-gallery';
 import EditImage from "../image-gallery/edit-image";
 import CreateImage from "../image-gallery/create-image";
-import CreateUser from "../users/create-users"
+import CreateUser from "../users/create-users";
+import Login from "../login/login";
+import Register from '../login/reg';
 
 
 const Navigation = () => {
@@ -18,6 +20,8 @@ const Navigation = () => {
       <Route path="/edit/:id" element={<EditImage/>} />
       <Route path="/create-image" element={<CreateImage/>} />
       <Route path="/create-user" element={<CreateUser/>} />
+      <Route path="/login" element={<Login/>} />
+      <Route path="/register" element={<Register/>} />
     </Routes>
   );
 }
