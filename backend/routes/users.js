@@ -1,7 +1,9 @@
 const router = require('express').Router();
 const bcrypt = require("bcrypt")
+const jwt = require("jsonwebtoken");
 const { response } = require('express');
 let User = require('../models/user.model');
+const { isRouteErrorResponse } = require('react-router-dom');
 
 router.route('/').get((req, res) => {
   User.find()
@@ -11,7 +13,6 @@ router.route('/').get((req, res) => {
 
 
 router.route('/register').post((request, response) => {
-  console.log(request.body.username)
   // hash the password
   bcrypt
     .hash(request.body.password, 10)
@@ -21,9 +22,6 @@ router.route('/register').post((request, response) => {
         username: request.body.username,
         password: hashedPassword,
       });
-
-      console.log(user);
-
       // save the new user
       user
         .save()
@@ -49,6 +47,73 @@ router.route('/register').post((request, response) => {
         e,
       });
     });
+});
+
+// login endpoint
+router.route("/login").post((request, response) => {
+  // check if email exists
+  User.findOne({ username: request.body.username })
+
+    // if email exists
+    .then((user) => {
+      // compare the password entered and the hashed password found
+      bcrypt
+        .compare(request.body.password, user.password)
+
+
+        // if the passwords match
+        .then((passwordCheck) => {
+
+          // check if password matches
+          if(!passwordCheck) {
+            return response.status(400).send({
+              message: "Passwords does not match",
+              error,
+            });
+          }
+
+          //   create JWT token
+          const token = jwt.sign(
+            {
+              userId: user._id,
+              userName: user.username,
+            },
+            "RANDOM-TOKEN",
+            { expiresIn: "24h" }
+          );
+
+          //   return success response
+          response.status(200).send({
+            message: "Login Successful",
+            username: user.username,
+            token,
+          });
+        })
+        // catch error if password does not match
+        .catch((error) => {
+          response.status(400).send({
+            message: "Passwords do not match",
+            error,
+          });
+        });
+    })
+    // catch error if email does not exist
+    .catch((e) => {
+      response.status(404).send({
+        message: "Email not found",
+        e,
+      });
+    });
+});
+
+// free endpoint
+router.route("/free-endpoint").get((request, response) => {
+  response.json({ message: "You are free to access me anytime" });
+});
+
+// authentication endpoint
+router.route("/auth-endpoint").get((request, response) => {
+  response.json({ message: "You are authorized to access me" });
 });
 
 module.exports = router;
