@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Navigate } from 'react-router-dom';
 
 
 
@@ -9,7 +10,8 @@ export default class Register extends Component <any, any> {
 
         this.state = {
             username : String,
-            password : String
+            password : String,
+            successReg: false
         }
 
         this.onChangeUsername = this.onChangeUsername.bind(this);
@@ -39,10 +41,22 @@ export default class Register extends Component <any, any> {
     
         axios
             .post('http://localhost:5000/users/register', data)
-            .then(res => console.log(res.data));
+            .then(res => {
+                console.log(res.data);
+                this.setState({successReg : true})
+                alert("Successfully Registered")
+            })
+            .catch(error => {
+                console.error(error);
+                alert("Register Failed. Please try again.");
+            });
     }
 
   render() {
+    if (this.state.successReg === true ) {
+        return <Navigate to = {{ pathname: "/home" }} />;
+
+    }
     return (
       <div className="bg-indigo-500 pt-5 min-h-screen">
         <div className="flex justify-center">
@@ -56,6 +70,13 @@ export default class Register extends Component <any, any> {
         
         <h1>Welcome</h1>
 
+        { this.state.successReg && 
+
+            ( 
+                <p className="text-green-500">{this.state.username} was registered successful!</p>
+            )
+
+        }
        
         <form 
             onSubmit={this.onSubmit} 

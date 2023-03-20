@@ -30,14 +30,22 @@ router.route('/register').post((request, response) => {
           response.status(201).send({
             message: "User Created Successfully",
             result,
+            alert:"Thanks you for registering " . username,
+
+
           });
+
         })
         // catch error if the new user wasn't added successfully to the database
         .catch((error) => {
           response.status(500).send({
             message: "Error creating user",
             error,
+            alert:"An error has triggered, please try again. If the issue keeps happening contact admin",
+            
+
           });
+
         });
     })
     // catch error if the password hash isn't successful
@@ -45,8 +53,12 @@ router.route('/register').post((request, response) => {
       response.status(500).send({
         message: "Password was not hashed successfully",
         e,
+        alert:"An error has triggered with the password hashing, please try again. If the issue keeps happening contact admin",
+
       });
+
     });
+
 });
 
 // login endpoint
@@ -66,10 +78,12 @@ router.route("/login").post((request, response) => {
 
           // check if password matches
           if(!passwordCheck) {
-            return response.status(400).send({
+            response.status(400).send({
               message: "Passwords does not match",
               error,
+              alert: message
             });
+
           }
 
           //   create JWT token
@@ -88,6 +102,7 @@ router.route("/login").post((request, response) => {
             username: user.username,
             token,
           });
+          
         })
         // catch error if password does not match
         .catch((error) => {
@@ -95,6 +110,7 @@ router.route("/login").post((request, response) => {
             message: "Passwords do not match",
             error,
           });
+
         });
     })
     // catch error if email does not exist

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Navigate } from 'react-router-dom';
 
 
 
@@ -9,7 +10,8 @@ export default class Login extends Component <any, any> {
 
         this.state = {
             username : String,
-            password : String
+            password : String,
+            loggedIn : false
         }
 
         this.onChangeUsername = this.onChangeUsername.bind(this);
@@ -38,11 +40,24 @@ export default class Login extends Component <any, any> {
     
         axios
             .post('http://localhost:5000/users/login', data)
-            .then(res => console.log(res.data));
+            .then(res => {
+                console.log(res.data);
+                this.setState({loggedIn : true})
+                alert("Logged In Successfully")
+            })
+            .catch(error => {
+                console.error(error);
+                alert("Login Failed. Please try again.");
+            });
     }
 
   render() {
+    if (this.state.loggedIn === true ) {
+        return <Navigate to = {{ pathname: "/create-image" }} />;
+
+    }
     return (
+
       <div>
 
         <div className="bg-indigo-500 pt-5 min-h-screen">
