@@ -3,6 +3,8 @@ const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken");
 const { response } = require('express');
 let User = require('../models/user.model');
+const { authenticateToken } = require('../auth');
+
 const { isRouteErrorResponse } = require('react-router-dom');
 
 router.route('/').get((req, res) => {
@@ -93,7 +95,7 @@ router.route("/login").post((request, response) => {
               userName: user.username,
             },
             "RANDOM-TOKEN",
-            { expiresIn: "24h" }
+            { expiresIn: "1h" }
           );
 
           //   return success response
@@ -128,7 +130,7 @@ router.route("/free-endpoint").get((request, response) => {
 });
 
 // authentication endpoint
-router.route("/auth-endpoint").get((request, response) => {
+router.route("/create-image").get(authenticateToken, (request, response) => {
   response.json({ message: "You are authorized to access me" });
 });
 
