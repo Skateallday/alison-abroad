@@ -1,6 +1,5 @@
  import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Blog from '../blog/blog';
 import Home from '../home/home';
 import ImageGallery from '../image-gallery/image-gallery';
 import EditImage from "../image-gallery/edit-image";
@@ -15,7 +14,6 @@ const Navigation = () => {
     <Routes>
       <Route  path='/' element={<Home />} />
       <Route  path='/home' element={<Home />} />
-      <Route  path='/blog' element={<Blog />} />
       <Route path='/image-gallery' element={<ImageGallery />} />
       <Route path="/edit/:id" element={<EditImage/>} />
       <Route path="/create-image" element={<CreateImage/>} />

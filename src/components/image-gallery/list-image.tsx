@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { ImagesProps } from '../interfaces/images';
-import myImage from '../../../backend/images/me.png';
 
 interface ImageData {
   _id: string;
@@ -13,7 +11,9 @@ interface ImageData {
   caption: string;
 }
 
+
 const GalleryImages = ({ src, width, height, country, subregion, caption }: ImageData) => (
+  
   <tr>
     <td>
       <img src={`http://localhost:5000/${src}`} width={width} height={height} />
@@ -24,12 +24,17 @@ const GalleryImages = ({ src, width, height, country, subregion, caption }: Imag
   </tr>
 );
 
-const ImagesList = () => {
+interface ImagesListProps {
+  country: string;
+}
+
+const ImagesList = ({ country }: ImagesListProps) => {
   const [galleries, setGalleries] = useState<ImageData[]>([]);
 
   useEffect(() => {
     axios.get<ImageData[]>('http://localhost:5000/images/')
       .then(response => {
+
         setGalleries(response.data);
       })
       .catch((error) => {
@@ -37,23 +42,31 @@ const ImagesList = () => {
       });
   }, []);
 
-  
+  // Filter images based on selected country
+  const filteredImages = galleries.filter((image) => image.country === country);
 
   return (
-    <div>
-      <h3>Logged images</h3>
-      <table className="table table-auto">
-        <thead className="thead-light">
+    <div className="mx-auto max-w-5xl p-6">
+      <table className="table-auto  rounded-lg">
+        <thead>
           <tr>
-            <th>Source</th>
-            <th>Country</th>
-            <th>Subregion</th>
-            <th>Caption</th>
+            <th className="px-4 py-2 text-left">Source</th>
+            <th className="px-4 py-2 text-left">Country</th>
+            <th className="px-4 py-2 text-left">Subregion</th>
+            <th className="px-4 py-2 text-left">Caption</th>
           </tr>
         </thead>
         <tbody>
-          {galleries.map((image) => (
-            <GalleryImages {...image} key={image._id} />
+          {filteredImages.map((image) => (
+            <GalleryImages
+              _id={image._id}
+              src={image.src}
+              width={image.width}
+              height={image.height}
+              country={image.country}
+              subregion={image.subregion}
+              caption={image.caption}
+            />
           ))}
         </tbody>
       </table>

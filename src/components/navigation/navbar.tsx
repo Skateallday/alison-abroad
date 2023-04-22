@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { HashRouter as Router, Route, Link, Routes } from 'react-router-dom'
 import Home  from '../home/home'
-import Blog from '../blog/blog'
 import logo from '../images/AALogo.svg'
 
 
@@ -63,16 +62,13 @@ export default function NavBar() {
                         }`}
                     >
                         <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-                            <li className="text-gray-600 hover:text-blue-600">
+                            <li className="text-gray-600 font-bold hover:text-blue-600">
                             <Link to='/home'>Home</Link>
                             </li>
-                            <li className="text-gray-600 hover:text-blue-600">
-                            <Link to='/blog'>Blog</Link>
-                            </li>
-                            <li className="text-gray-600 hover:text-blue-600">
+                            <li className="text-gray-600 font-bold hover:text-blue-600">
                             <Link to='/image-gallery'>Image Gallery</Link>
                             </li>
-                            <li className="text-gray-600 hover:text-blue-600">
+                            <li className="text-gray-600 font-bold hover:text-blue-600">
                             <Link to='/Contact-Us'>Contact Us</Link>
                             </li>
                         </ul>
