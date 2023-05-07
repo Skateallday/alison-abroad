@@ -1,10 +1,14 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect  } from "react";
 import axios from "axios";
+import  SearchCountries  from "./search-countries"
+
+
 
 export default class CreateImage extends Component<any, any> {
   constructor(props: any) {
     super(props);
 
+    
     this.state = {
       src: String,
       width: Number,
@@ -130,8 +134,33 @@ export default class CreateImage extends Component<any, any> {
       });
   }
 
+  CountrySearch = () => {
+    const [inputValue, setInputValue] = useState('');
+    const [countryList, setCountryList] = useState<string[]>([]);
+    
+  
+    const handleCountryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setInputValue(event.target.value);
+    };
+  
+    useEffect(() => {
+      fetch('https://restcountries.com/v2/all')
+        .then(response => response.json())
+        .then(data => {
+          const countries = data.map((country: any) => country.name);
+          const filteredCountries = countries.filter((country: string) =>
+            country.toLowerCase().includes(inputValue.toLowerCase())
+          );
+          setCountryList(filteredCountries);
+        })
+        .catch(error => console.error(error));
+    }, [inputValue]);}
+ 
+
   render() {
     const { countries } = this.state;
+
+    
 
     return (
       <div>
@@ -222,14 +251,8 @@ export default class CreateImage extends Component<any, any> {
                   {this.state.country === "new-country" && (
                     <div>
                       <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="newCountryName">New country name:</label>
-                      <input
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        type="text"
-                        name="newCountryName"
-                        value={this.state.newCountryName}
-                        onChange={this.onChangeCountry}
-                      />
-                    </div>
+                      <SearchCountries value={this.state.country} onChange={(value: string) => this.setState({ searchTerm: value })} />
+                </div>
                   )}
                 </div>
                 <div className="mb-4">
