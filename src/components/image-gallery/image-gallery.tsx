@@ -4,7 +4,7 @@ import ImagesList from "./list-image";
 import axios from "axios";
 
 const ImageGallery = () => {
-  const [country, setCountry] = useState("France");
+  const [country, setCountry] = useState("Scotland");
   const [countries, setCountries] = useState([]);
 
   useEffect(() => {
