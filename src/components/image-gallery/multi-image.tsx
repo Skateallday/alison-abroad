@@ -72,13 +72,15 @@ export default class MultiImage extends Component<any, any> {
     
     const formData = new FormData();
     const files = e.target.elements.src.files;
+    const capitalizedCountry = this.state.country.charAt(0).toUpperCase() + this.state.country.slice(1);
+
 
     for (let i = 0; i < files.length; i++) {
       formData.append(`src`, files[i]);
     }
     formData.append("width", this.state.width);
     formData.append("height", this.state.height);
-    formData.append("country", this.state.country);
+    formData.append("country", capitalizedCountry);
     formData.append("subregion", this.state.subregion);
     formData.append("caption", this.state.caption);
 

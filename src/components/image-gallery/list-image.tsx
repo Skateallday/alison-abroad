@@ -43,10 +43,13 @@ const ImagesList = ({ country }: ImagesListProps) => {
   
 
   return (
-    <div className="mx-auto max-w-5xl p-6">
+    <div className="w-full object-cover flex content-center">
+      <div>
       <ImageGallery
         items={filteredImages}
       />
+      </div>
+
     </div>
   );
 };
