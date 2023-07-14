@@ -4,6 +4,7 @@ import { Navigate } from 'react-router-dom';
 
 
 
+
 export default class Login extends Component <any, any> {
     constructor (props: any){
         super(props);
@@ -17,7 +18,10 @@ export default class Login extends Component <any, any> {
         this.onChangeUsername = this.onChangeUsername.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+
     }
+
+
 
     onChangeUsername(e: React.ChangeEvent<any>) {
         this.setState({
@@ -36,13 +40,13 @@ export default class Login extends Component <any, any> {
             username: this.state.username,
             password: this.state.password
         };
-        console.log(data);
+        
     
         axios
             .post('http://localhost:5000/users/login', data)
             .then(res => {
-                console.log(res.data);
                 this.setState({loggedIn : true})
+                localStorage.setItem('jwtToken', res.data.token); // Store the JWT token in localStorage
                 alert("Logged In Successfully")
             })
             .catch(error => {

@@ -1,0 +1,135 @@
+:root {
+    --background-rgb: 40 44 52;
+
+    
+    --grey-rgb: 46 56 89;
+    --primary-rgb: var(--grey-rgb);
+    
+  }
+  
+
+  
+  body {
+    height: 75vh;
+    display: grid;
+    place-items: center;
+    background-color: rgb(var(--background-rgb));
+    margin: 0rem;
+    
+  }
+  
+  .screen {
+    width: 100%;
+    display: flex;
+    background-color: rgb(var(--primary-rgb) / 15%);
+    overflow: hidden;
+    position: relative;
+    z-index: 10;
+  }
+
+  .screen > .screen-image{
+    background-image: url("https://images.unsplash.com/photo-1515266591878-f93e32bc5937?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80");
+     height:75vh;
+    width:100%;
+    background-size:100%;
+    background-position: center;
+    animation: pan-image 15s infinite linear;
+    opacity: 0.6;
+    position: absolute;
+    z-index: 1;
+  }
+
+
+  .screen > .screen-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    flex-grow: 1;
+    gap: 4rem;
+    position: relative;
+    top:50px;
+    z-index: 3;
+    margin: 1rem;
+    padding-bottom: 6rem;
+  }
+  .screen > .screen-content > .screen-user{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+  }
+
+
+
+.screen > .screen-content > .screen-user > :is(.name, .title) {
+  font-family: "Source Code Pro", monospace;
+  color: white; 
+  text-align: center;
+  text-transform: uppercase; 
+}
+
+.screen > .screen-content > .screen-user > .name {
+  position: relative;
+  font-size: 4.25rem;
+  font-weight: 400;
+}
+
+
+
+  @keyframes pan-overlay {
+    from {
+        background-position: 0% 0%;
+    }
+
+    to {
+        background-position: 0% -100%;
+    }
+  }
+  @keyframes pan-image {  
+    0% {
+      background-position: 36% 42%;
+      background-size: 200%;
+    }
+    
+    20% {
+      background-position: 30% 35%;
+      background-size: 200%;
+    }
+    
+    20.0001% { /* -- View 2 -- */
+      background-position: 60% 85%;
+      background-size: 100%;
+    }
+    
+    40% {
+      background-position: 49% 81%;
+      background-size: 100%;
+    }
+    
+    40.0001% { /* -- View 3 -- */
+      background-position: 80% 42%;
+      background-size: 200%;
+    }
+    
+    60% {
+      background-position: 84% 33%;
+      background-size: 200%;
+    }
+    
+    60.0001% { /* -- View 4 -- */
+      background-position: 0% 0%;
+      background-size: 100%;
+    }
+    
+    80% {
+      background-position: 15% 4%;
+      background-size: 100%;
+    }
+    
+    80.0001% { /* -- View 5 -- */
+      background-position: 80% 10%;
+      background-size: 100%;
+    }
+  }

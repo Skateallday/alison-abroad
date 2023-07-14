@@ -1,13 +1,10 @@
 const router = require('express').Router();
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken");
-const { response } = require('express');
+const crypto = require('crypto');
 let User = require('../models/user.model');
-const { authenticateToken } = require('../auth');
 
-const { isRouteErrorResponse } = require('react-router-dom');
-
-router.route('/').get((req, res) => {
+router.route('/').get((res) => {
   User.find()
     .then(users => res.json(users))
     .catch(err => res.status(400).json('Error: ' + err));
@@ -62,76 +59,56 @@ router.route('/register').post((request, response) => {
     });
 
 });
-
-// login endpoint
 router.route("/login").post((request, response) => {
   // check if email exists
   User.findOne({ username: request.body.username })
-
-    // if email exists
     .then((user) => {
       // compare the password entered and the hashed password found
-      bcrypt
-        .compare(request.body.password, user.password)
-
-
-        // if the passwords match
+      bcrypt.compare(request.body.password, user.password)
         .then((passwordCheck) => {
-
-          // check if password matches
-          if(!passwordCheck) {
+          if (!passwordCheck) {
             response.status(400).send({
-              message: "Passwords does not match",
+              message: "Passwords do not match",
               error,
-              alert: message
             });
-
           }
+          const randomString = crypto.randomBytes(32).toString('hex');
 
-          //   create JWT token
+          // create JWT token
           const token = jwt.sign(
             {
               userId: user._id,
               userName: user.username,
             },
-            "RANDOM-TOKEN",
+            randomString,
             { expiresIn: "1h" }
           );
-
-          //   return success response
+                    // set JWT as an HTTP-only cookie with secure and SameSite attributes
+          response.cookie('jwtToken', token, {
+            withCredentials: true,
+            httpOnly: false,
+            
+          });
+          // return success response
           response.status(200).send({
             message: "Login Successful",
             username: user.username,
             token,
           });
-          
         })
-        // catch error if password does not match
         .catch((error) => {
           response.status(400).send({
             message: "Passwords do not match",
             error,
           });
-
         });
     })
-    // catch error if email does not exist
     .catch((e) => {
       response.status(404).send({
         message: "Email not found",
         e,
       });
     });
-});
-
-// free endpoint
-router.route("/free-endpoint").get((request, response) => {
-  response.json({ message: "You are free to access me anytime" });
-});
-
-// authentication endpoint
-router.route("/create-image").get(authenticateToken, (request, response) => {
-  response.json({ message: "You are authorized to access me" });
 });
 
 module.exports = router;

@@ -1,24 +1,48 @@
 import { useState } from "react";
 import { HashRouter as Router, Route, Link, Routes } from 'react-router-dom'
 import logo from '../images/AALogo.svg'
+import Logout from "../login/logout";
+import "./nav.css"
 
 
-
-export default function NavBar() {
+export default function AdminNavBar() {
     const [navbar, setNavbar] = useState(false);
 
-    return (
 
-<nav className="w-full bg-white shadow">
-            <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
-                <div>
+    // Function to check if the user is authenticated
+    const isAuthenticated = () => {
+    // Get the token from local storage
+    const token = localStorage.getItem('jwtToken');
+  
+    // Check if the token exists
+    return token !== null;
+    }
+
+    const adminDisplay = isAuthenticated() ? 'block' : 'none';
+
+
+    
+
+    return (
+<div>
+<button
+                className="p-2 text-green-700 rounded-md outline-none focus:border-green-400 focus:border"
+                
+                >display
+            </button>
+<nav style={{display: adminDisplay}} className='w-full bg-green-500 shadow AdminNav'  >
+
+            <div>
+            
+            <div  className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
+            
                     <div className="flex items-center justify-between py-3 md:py-5 md:block">
                         <a href="javascript:void(0)">
                         <img src={logo} />
                         </a>
                         <div className="md:hidden">
                             <button
-                                className="p-2 text-gray-700 rounded-md outline-none focus:border-gray-400 focus:border"
+                                className="p-2 text-green-700 rounded-md outline-none focus:border-green-400 focus:border"
                                 onClick={() => setNavbar(!navbar)}
                             >
                                 {navbar ? (
@@ -61,14 +85,17 @@ export default function NavBar() {
                         }`}
                     >
                         <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-                            <li className="text-gray-600 font-bold hover:text-blue-600">
-                            <Link to='/home'>Home</Link>
+                            <li className="text-white font-bold hover:text-blue-600">
+                            <Link to='/home'>ADMIN</Link>
                             </li>
-                            <li className="text-gray-600 font-bold hover:text-blue-600">
-                            <Link to='/image-gallery'>Image Gallery</Link>
+                            <li className="text-white font-bold hover:text-blue-600">
+                            <Link to='/create-image'>NEW</Link>
                             </li>
-                            <li className="text-gray-600 font-bold hover:text-blue-600">
-                            <Link to='/Contact-Us'>Contact Us</Link>
+                            <li className="text-white font-bold hover:text-blue-600">
+                            <Link to='/edit/:id'>EDIT</Link>
+                            </li>
+                            <li className="text-red-600 font-bold hover:text-blue-600">
+                                {Logout()}
                             </li>
                         </ul>
                        
@@ -76,5 +103,6 @@ export default function NavBar() {
                 </div>
             </div>
         </nav>
+        </div>
     );
 }
