@@ -68,7 +68,7 @@ export default function NavBar() {
                             <Link to='/image-gallery'>Image Gallery</Link>
                             </li>
                             <li className="text-gray-600 font-bold hover:text-blue-600">
-                            <Link to='/Contact-Us'>Contact Us</Link>
+                            <Link to='/travel-map'>Travel Map</Link>
                             </li>
                         </ul>
                        

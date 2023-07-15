@@ -7,6 +7,7 @@ import CreateImage from "../image-gallery/create-image";
 import CreateUser from "../users/create-users";
 import Login from "../login/login";
 import Register from '../login/reg';
+import TravelMap from '../travelmap/travelmap';
 
 // Function to check if the user is authenticated
 const isAuthenticated = () => {
@@ -24,11 +25,13 @@ const isAuthenticated = () => {
   };
   
   const Navigation = () => {
+
     return (
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/home' element={<Home />} />
         <Route path='/image-gallery' element={<ImageGallery />} />
+        <Route path='/travel-map' element={<TravelMap geographies={[]} geo={''}/>} />
         <Route path="/edit/:id" element={<ProtectedRoute element={<EditImage />} path="/edit/:id" />} />
         <Route path="/create-image" element={<ProtectedRoute element={<CreateImage />} path="/create-image" />} />
         <Route path="/create-user" element={<ProtectedRoute element={<CreateUser />} path="/create-user" />} />

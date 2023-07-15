@@ -25,11 +25,6 @@ export default function AdminNavBar() {
 
     return (
 <div>
-<button
-                className="p-2 text-green-700 rounded-md outline-none focus:border-green-400 focus:border"
-                
-                >display
-            </button>
 <nav style={{display: adminDisplay}} className='w-full bg-green-500 shadow AdminNav'  >
 
             <div>

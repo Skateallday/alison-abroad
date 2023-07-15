@@ -6,12 +6,9 @@
     --primary-rgb: var(--grey-rgb);
     
   }
-  
-
-  
+    
   body {
     height: 75vh;
-    display: grid;
     place-items: center;
     background-color: rgb(var(--background-rgb));
     margin: 0rem;
