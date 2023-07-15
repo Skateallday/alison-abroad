@@ -1,0 +1,24 @@
+
+circle { 
+    fill:#F53;
+    stroke:#FFF;
+    transition: all .2s ease-in-out;
+ }
+
+circle:hover{ 
+
+    transform: scale(1.1);
+ }
+
+
+.text:hover{
+    opacity: 100%;
+    transition: all 1.1s ease-in-out;
+ }
+
+ .text{
+    textAnchor:middle;
+     fill:#Fff;
+    opacity: 0;
+ }
+
