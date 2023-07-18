@@ -1,6 +1,8 @@
 {
   "name": "alison-abroad",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "A MERN stack project to showcase Alison's time in Europe",
+  
   "private": true,
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.16.7",

@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect  } from "react";
+import React, { Component } from "react";
 import axios from "axios";
 
 export default class MultiImage extends Component<any, any> {

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import ImagesList from "./list-image";
-import axios from "axios";
 import { getImages } from "../api/getImages";
 
 interface Image {

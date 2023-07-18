@@ -61,7 +61,7 @@ export default class EditImage extends Component {
             return (
               <tr key={currentImage._id}>
                 <td>
-                  <img className="object-scale-down h-48 w-96" src={currentImage.src} />
+                  <img alt="Edit Images" className="object-scale-down h-48 w-96" src={currentImage.src} />
 
                 </td>
                 <td><input type="text" placeholder={currentImage.country}/></td>

@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { HashRouter as Router, Route, Link, Routes } from 'react-router-dom'
-import logo from '../images/AALogo.svg'
+import { HashRouter as  Route, Link } from 'react-router-dom'
 import Logout from "../login/logout";
 import "./nav.css"
 
@@ -32,9 +31,7 @@ export default function AdminNavBar() {
             <div  className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
             
                     <div className="flex items-center justify-between py-3 md:py-5 md:block">
-                        <a href="javascript:void(0)">
-                        <img src={logo} />
-                        </a>
+                        
                         <div className="md:hidden">
                             <button
                                 className="p-2 text-green-700 rounded-md outline-none focus:border-green-400 focus:border"
