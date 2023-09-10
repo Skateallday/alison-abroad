@@ -8,7 +8,7 @@ interface Image {
 }
 
 const ImageGallery: React.FC = () => {
-  const [country, setCountry] = useState<string>("Italy");
+  const [country, setCountry] = useState<string>("Scotland");
   const [countries, setCountries] = useState<string[]>([]);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const ImageGallery: React.FC = () => {
   return (
     <div className="App-header">
       <div className="justify-center text-left p-10">
-        <h1 className="text-3xl py-5">Welcome to my {country} Images</h1>
+        <h1 className="text-3xl py-5">Here are my {country} Images</h1>
         <div className="flex flex-wrap p-4">
           {countries.map((countryOption) => (
             <button
@@ -48,11 +48,13 @@ const ImageGallery: React.FC = () => {
           ))}
         </div>
         <p>
-          Discover the beauty of {country} through my collection of photographs.
-          Each image tells a story and captures a unique moment in time. From
-          breathtaking landscapes to vibrant city scenes, there's something for
-          everyone to enjoy. So sit back, relax, and let me take you on a
-          journey through {country}.
+        Alison is a keen photographer who has an unwavering passion for 
+        capturing the beauty of stunning locations during her travels. 
+        Her lens has a knack for preserving exquisite moments in time, 
+        from enchanting landscapes to vibrant city scenes. So, join her 
+        as she shares her photographic journey through her travels, where 
+        every click of her camera tells a unique story, allowing you to 
+        discover the captivating charm of this remarkable place.
         </p>
       </div>
       <div className="relative bg-slate-700">
@@ -60,15 +62,7 @@ const ImageGallery: React.FC = () => {
           <ImagesList country={country} />
         </div>
       </div>
-      <div className="justify-center text-left p-10">
-        <p>
-          Discover the beauty of {country} through my collection of photographs.
-          Each image tells a story and captures a unique moment in time. From
-          breathtaking landscapes to vibrant city scenes, there's something for
-          everyone to enjoy. So sit back, relax, and let me take you on a
-          journey through {country}.
-        </p>
-      </div>
+      
     </div>
   );
 };

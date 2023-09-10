@@ -1,12 +1,12 @@
 const markers = [
     { coordinates: [-3.1883, 55.9533], fill: "#F53", text: "Scotland" },
-    { coordinates: [-0.1278, 51.5074], fill: "#05C", text: "England" },
-    { coordinates: [-6.2603, 53.3498], fill: "#0AC", text: "Ireland" },
+    { coordinates: [-1.7278, 53.5074], fill: "#05C", text: "England" },
+    { coordinates: [-8.2603, 53.3498], fill: "#0AC", text: "Ireland" },
     { coordinates: [-3.1791, 51.4816], fill: "#F53", text: "Wales" },
-    { coordinates: [13.4050, 52.5200], fill: "#F53", text: "Germany" },
+    { coordinates: [10.4050, 51.5200], fill: "#F53", text: "Germany" },
     { coordinates: [-3.7038, 40.4168], fill: "#05C", text: "Spain" },
     { coordinates: [2.3522, 48.8566], fill: "#0AC", text: "France" },
-    { coordinates: [4.8952, 52.3702], fill: "#F53", text: "Netherlands" },
+    { coordinates: [5.8952, 52.3702], fill: "#F53", text: "Netherlands" },
     { coordinates: [14.5058, 35.8980], fill: "#05C", text: "Malta" },
     { coordinates: [12.4964, 41.9028], fill: "#0AC", text: "Italy" },
     { coordinates: [19.0402, 47.4979], fill: "#F53", text: "Hungary" },
@@ -35,9 +35,8 @@ const markers = [
     { coordinates: [18.7061, 44.4268], fill: "#F53", text: "Croatia" },
     { coordinates: [10.4515, 51.1657], fill: "#05C", text: "Denmark" },
     { coordinates: [19.5033, 47.1625], fill: "#0AC", text: "Switzerland" },
-    // Add more capital cities and their coordinates here
-    ];
-    
-
-
-export default markers;
+    // Add more central coordinates for other European countries here
+  ];
+  
+  export default markers;
+  

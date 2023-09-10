@@ -22,3 +22,6 @@ circle:hover{
      font-weight: bolder;
  }
 
+.hidden{
+    display:hidden;
+}
