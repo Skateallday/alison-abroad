@@ -4,7 +4,7 @@ import TravelMapData, { CountryData } from "./travelmapdata";
 import markers from "./markers";
 import './styles.css'
 
-const geoUrl = "https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.json"
+const geoUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json"
 type GeoData = {
     rsmKey: string;
     // Add other properties as needed

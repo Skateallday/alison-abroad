@@ -25,7 +25,6 @@ export default class SingleImage extends Component<any, any> {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-
   onChangeWidth(e: React.ChangeEvent<any>) {
     this.setState({
       width: parseInt(e.target.value),
@@ -99,10 +98,7 @@ export default class SingleImage extends Component<any, any> {
           messageType: "error",
         });
       });
-  }
-
-  
- 
+  } 
 
   render() {    
 
@@ -184,9 +180,7 @@ export default class SingleImage extends Component<any, any> {
                     value={this.state.country}
                     onChange={this.onChangeCountry}
                   />
-                </div>
-    
-   
+                </div> 
                 
                 <div className="mb-4">
                   <label className="block text-gray-700 text-sm font-bold mb-2">
