@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
+import config from '../../config';
 
 export const getImages = (): Promise<AxiosResponse> => {
-  return axios.get('http://localhost:5000/images');
+  return axios.get(`${config.apiUrl}/images`);
 };

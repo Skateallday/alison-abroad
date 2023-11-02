@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
+import config from '../../config';
+
 
 export default class SingleImage extends Component<any, any> {
   constructor(props: any) {
@@ -80,7 +82,7 @@ export default class SingleImage extends Component<any, any> {
     formData.append("caption", this.state.caption);
 
     axios
-      .post("http://localhost:5000/images/add", formData, {
+      .post(`${config.apiUrl}/images/add`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

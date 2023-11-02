@@ -3,6 +3,8 @@ import axios from 'axios';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
+import config from '../../config';
+
 
 
 
@@ -24,7 +26,7 @@ const ImagesList = ({ country }: ImagesListProps) => {
   const [galleries, setGalleries] = useState<ImageData[]>([]);
 
   useEffect(() => {
-    axios.get<ImageData[]>('http://localhost:5000/images/')
+    axios.get<ImageData[]>(`${config.apiUrl}/images/`)
       .then(response => {
 
         setGalleries(response.data);
@@ -36,7 +38,7 @@ const ImagesList = ({ country }: ImagesListProps) => {
 
   // Filter images based on selected country
   const filteredImages = galleries.filter((image) => image.country === country).map((image) => ({
-      src: `http://localhost:5000/${image.src}`,
+      src: `${config.apiUrl}/${image.src}`,
       width: image.width,
       height: image.height,
       caption: image.country,
