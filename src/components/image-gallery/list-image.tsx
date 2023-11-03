@@ -6,8 +6,6 @@ import ImageListItemBar from '@mui/material/ImageListItemBar';
 import config from '../../config';
 
 
-
-
 interface ImageData {
   _id: string;
   src: string;

@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 
 
 const imageSchema = new Schema({
+    id: {type :String, required:false},
     src: { type: String, required: true },
     width: { type: Number, required: false },
     height: { type: Number, required: false },
