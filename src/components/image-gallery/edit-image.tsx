@@ -38,30 +38,27 @@ const GalleryImage = (props: ImagesProps & { handleDeleteImage: (imageId: string
 
 const EditImage = ({ galleries, setGalleries }: { galleries: ImagesProps[]; setGalleries: React.Dispatch<React.SetStateAction<ImagesProps[]>> }) => {
 
-  const handleDeleteImage = (id: string) => {
-    console.log('Image ID to delete:', id);
-    const confirmed = window.confirm('Are you sure you want to delete this image?');
-    console.log('User confirmed:', confirmed);
-  
-    if (confirmed) {
-      axios
-        .delete(`${config.apiUrl}/images/${id}`)
-        .then((response) => {
-          console.log('Image deleted successfully');
-          // Show a success toast notification
-          toast.success('Image deleted successfully', {
-            position: toast.POSITION.TOP_RIGHT,
-          });
-  
-          // You may want to update the galleries state here to reflect the deleted image.
-          // For example, remove the deleted image from the state.
-        })
-        .catch((error) => {
-          console.error('Error deleting image:', error.message);
-        });
-    }
-  };
+  const handleDeleteImage = (imageId: string) => {
+    // Delete the image using Axios, similar to your existing implementation
+    const confirmed = window.confirm('Are you sure you want to delete this image?')
 
+    if (confirmed) {
+    axios.delete(`${config.apiUrl}/images/${imageId}`)
+      .then((response) => {
+        console.log('Image deleted successfully');
+        // Show a success toast notification
+        toast.success('Image deleted successfully', {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+
+        // Remove the deleted image from the state
+        setGalleries(prevGalleries => prevGalleries.filter(image => image._id !== imageId));
+      })
+      .catch((error) => {
+        console.error('Error deleting image:', error.message);
+      });
+  };
+  };
   const handleEditImage = (imageId: string, editedCaption: string, editedCountry: string, editedSubregion: string) => {
     // Implement the logic to update the image with the specified data.
     // You can make an API request to update the image data on the server.
