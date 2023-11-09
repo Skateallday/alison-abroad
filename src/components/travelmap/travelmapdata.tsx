@@ -1,6 +1,7 @@
 // TravelMapData.tsx
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
+import config from '../../config';
 
 export interface CountryData {
   country: string;
@@ -26,7 +27,7 @@ const TravelMapData: React.FC<TravelMapDataProps> = ({ onCountryData }) => {
 
   useEffect(() => {
     axios
-      .get<ImageData[]>("http://localhost:5000/images/")
+      .get<ImageData[]>(`${config.apiUrl}/images/`)
       .then((response) => {
         // Count occurrences of each country
         const countryCounts: { [key: string]: number } = {};

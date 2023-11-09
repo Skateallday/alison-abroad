@@ -1,5 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react';
+import config from '../../config';
+
 
 export default class CreateUser extends Component<any, any> {
     constructor(props: any){
@@ -27,7 +29,7 @@ export default class CreateUser extends Component<any, any> {
 
         console.log(newUser);
 
-        axios.post('http://localhost:5000/users/add', newUser)
+        axios.post(`${config.apiUrl}/users/add`, newUser)
         .then(res => console.log(res.data));
 
         this.setState({

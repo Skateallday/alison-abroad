@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
+import config from '../../config';
 
 
 
@@ -43,7 +44,7 @@ export default class Login extends Component <any, any> {
         
     
         axios
-            .post('http://localhost:5000/users/login', data)
+            .post(`${config.apiUrl}/users/login`, data)
             .then(res => {
                 this.setState({loggedIn : true})
                 localStorage.setItem('jwtToken', res.data.token); // Store the JWT token in localStorage

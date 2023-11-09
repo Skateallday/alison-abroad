@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const crypto = require('crypto');
 let User = require('../models/user.model');
 
-router.route('/').get((res) => {
+router.route('/').get((req, res) => {
   User.find()
     .then(users => res.json(users))
     .catch(err => res.status(400).json('Error: ' + err));
@@ -29,7 +29,7 @@ router.route('/register').post((request, response) => {
           response.status(201).send({
             message: "User Created Successfully",
             result,
-            alert:"Thanks you for registering " . username,
+            alert: `Thanks you for registering ${request.body.username}`,
 
 
           });
@@ -86,7 +86,7 @@ router.route("/login").post((request, response) => {
                     // set JWT as an HTTP-only cookie with secure and SameSite attributes
           response.cookie('jwtToken', token, {
             withCredentials: true,
-            httpOnly: false,
+            httpOnly: true,
             
           });
           // return success response

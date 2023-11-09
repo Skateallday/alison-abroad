@@ -15,7 +15,7 @@ const GalleryImage = (props: ImagesProps & { handleDeleteImage: (imageId: string
   return (
     <tr>
       <td>
-        <img alt="Edit Images" className="object-scale-down h-48 w-96" src={`http://localhost:5000/${props.src}`} />
+        <img alt="Edit Images" className="object-scale-down h-48 w-96" src={`${config.apiUrl}/${props.src}`} />
       </td>
       <td><input type="text" value={editedCountry} onChange={(e) => setEditedCountry(e.target.value)} /></td>
       <td><input type="text" value={editedSubregion} onChange={(e) => setEditedSubregion(e.target.value)} /></td>
