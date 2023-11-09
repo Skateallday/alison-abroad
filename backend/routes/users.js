@@ -10,6 +10,10 @@ router.route('/').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+// Handle requests that don't match any API routes
+router.route('*').get((req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+});
 
 router.route('/register').post((request, response) => {
   // hash the password
@@ -59,6 +63,7 @@ router.route('/register').post((request, response) => {
     });
 
 });
+
 router.route("/login").post((request, response) => {
   // check if email exists
   User.findOne({ username: request.body.username })

@@ -2,7 +2,6 @@ import axios from 'axios';
 import React, { Component } from 'react';
 import config from '../../config';
 
-
 export default class CreateUser extends Component<any, any> {
     constructor(props: any){
         super(props)
@@ -27,16 +26,14 @@ export default class CreateUser extends Component<any, any> {
             username: this.state.username,
         };
 
-        console.log(newUser);
-
         axios.post(`${config.apiUrl}/users/add`, newUser)
         .then(res => console.log(res.data));
 
         this.setState({
             username: ''
         })
-
     }
+    
   render() {
     return (
         <div className="w-full max-w-xs">
