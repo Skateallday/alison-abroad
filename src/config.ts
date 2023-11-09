@@ -1,6 +1,6 @@
 //config.ts
 const config = {
-    apiUrl:'https://alisonabroad.onrender.com', // Production URL
+    apiUrl:'https://alison-abroad-n586.onrender.com', // Production URL
 };
 
 export default config;
