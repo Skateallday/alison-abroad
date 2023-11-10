@@ -37,4 +37,7 @@ app.use('/images', imageRouter);
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
 
+// Middleware for handling client-side routing
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
