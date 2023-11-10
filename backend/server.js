@@ -2,6 +2,9 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const mongoose = require('mongoose');
+const ReactDOMServer = require('react-dom/server');
+import Login from '../src/components/login/login'; // Import your LoginPage component
+
 
 
 require('dotenv').config();
@@ -40,6 +43,15 @@ app.get("/*", function (req, res) {
       res.status(500).send(err);
     }
   });
+});
+
+// Route for /login with server-side rendering
+app.get('/login', (req, res) => {
+  // Perform any necessary data fetching or processing here
+  const serverRenderedContent = renderLoginPage();
+
+  // Send the fully rendered HTML to the client
+  res.send(serverRenderedContent);
 });
 
 app.listen(port, () => {

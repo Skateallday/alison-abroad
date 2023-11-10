@@ -1,36 +1,28 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter } from 'react-router-dom'
-//import Navigation from './components/routes/routes';
+import { hydrate } from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 import Navigation from './components/routes/routes';
-import NavBar from './components/navigation/navbar'
+import NavBar from './components/navigation/navbar';
 import AdminNavBar from './components/navigation/admin-nav';
-import footer from './components/footer/footer'
-
-
+import footer from './components/footer/footer';
 
 function App() {
-
-
   return (
-    <div className="App">            
-
-        <BrowserRouter>
+    <div className="App">
+      <BrowserRouter>
         <AdminNavBar />
         <NavBar />
+        <Navigation />
+      </BrowserRouter>
 
-          <Navigation />
-
-        </BrowserRouter>
-
-
-      <footer >
-        {footer()}
-      </footer>
+      <footer>{footer()}</footer>
     </div>
-    
   );
 }
 
-export default App; 
+// Use hydrate to render the app on the client side
+const rootElement = document.getElementById('root');
+hydrate(<App />, rootElement);
 
+export default App;
