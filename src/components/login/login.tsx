@@ -3,9 +3,6 @@ import axios from 'axios';
 import { Navigate } from 'react-router-dom';
 import config from '../../config';
 
-
-
-
 export default class Login extends Component <any, any> {
     constructor (props: any){
         super(props);
@@ -19,10 +16,7 @@ export default class Login extends Component <any, any> {
         this.onChangeUsername = this.onChangeUsername.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-
     }
-
-
 
     onChangeUsername(e: React.ChangeEvent<any>) {
         this.setState({
@@ -41,8 +35,7 @@ export default class Login extends Component <any, any> {
             username: this.state.username,
             password: this.state.password
         };
-        
-    
+            
         axios
             .post(`${config.apiUrl}/users/login`, data)
             .then(res => {

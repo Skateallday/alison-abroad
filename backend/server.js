@@ -10,7 +10,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(cors({
-  origin: 'https://alison-abroad.onrender.com', // Replace with your frontend URL
+  origin: 'https://alison-abroad.onrender.com', 
   methods: 'GET, POST, PUT, DELETE',
   credentials: true, // Enable sending cookies across origins
 }));
