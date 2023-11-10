@@ -2,8 +2,6 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const mongoose = require('mongoose');
-const ReactDOMServer = require('react-dom/server');
-const Login = require('../src/components/login/login');
 
 
 
@@ -35,24 +33,6 @@ const usersRouter = require('./routes/users');
 
 app.use('/users', usersRouter);
 app.use('/images', imageRouter);
-
-
-app.get("/*", function (req, res) {
-  res.sendFile(path.join(__dirname, "../build/index.html"), function (err) {
-    if (err) {
-      res.status(500).send(err);
-    }
-  });
-});
-
-// Route for /login with server-side rendering
-app.get('/login', (req, res) => {
-  // Perform any necessary data fetching or processing here
-  const serverRenderedContent = renderLoginPage();
-
-  // Send the fully rendered HTML to the client
-  res.send(serverRenderedContent);
-});
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
