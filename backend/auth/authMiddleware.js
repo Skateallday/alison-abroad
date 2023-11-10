@@ -12,7 +12,7 @@ function authenticateToken(req, res, next) {
 
   try {
     // Verify and decode the JWT token
-    const decodedToken = jwt.verify(token, 'YOUR_SECRET_KEY');
+    const decodedToken = jwt.verify(token, process.env.secret_key);
 
     // Add the decoded token to the request object for further use
     req.decodedToken = decodedToken;
