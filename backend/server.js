@@ -42,5 +42,5 @@ app.use('/images', imageRouter);
 
 // Middleware for handling client-side routing
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  res.sendFile(path.join(__dirname, '../build', 'index.html'));
 });
