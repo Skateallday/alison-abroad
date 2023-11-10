@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import config from '../../config';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; // Import the CSS
 
 
 export default class MultiImage extends Component<any, any> {
@@ -97,9 +99,13 @@ export default class MultiImage extends Component<any, any> {
     })
     .then((res) => {
       if (res.status === 200) {
+      // Show a success toast notification
+      toast.success('Image deleted successfully', {
+        position: toast.POSITION.TOP_RIGHT,
+      });
         // Check if the response status is 200 (OK) to ensure a successful upload
         this.setState({
-          message: "Image uploaded successfully!",
+          message: "Images uploaded successfully!",
           messageType: "success",
         });
       } else {

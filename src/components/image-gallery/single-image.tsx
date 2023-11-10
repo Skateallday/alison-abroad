@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import config from '../../config';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; // Import the CSS
 
 
 export default class SingleImage extends Component<any, any> {
@@ -87,18 +89,11 @@ export default class SingleImage extends Component<any, any> {
         "Content-Type": "multipart/form-data",
       },
     })
-    .then((res) => {
-      if (res.data.success) {
-        this.setState({
-          message: "Image uploaded successfully!",
-          messageType: "success",
+    .then(() => {
+        // Show a success toast notification
+        toast.success('Image uploaded successfully', {
+          position: toast.POSITION.TOP_RIGHT,
         });
-      } else {
-        this.setState({
-          message: "Image upload was successful, but there is an issue with the response.",
-          messageType: "error",
-        });
-      }
     })
     .catch((error) => {
       console.error(error);
