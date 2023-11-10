@@ -82,24 +82,31 @@ export default class SingleImage extends Component<any, any> {
     formData.append("caption", this.state.caption);
 
     axios
-      .post(`${config.apiUrl}/images/add`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-      .then((res) => {
+    .post(`${config.apiUrl}/images/add`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    .then((res) => {
+      if (res.data.success) {
         this.setState({
           message: "Image uploaded successfully!",
           messageType: "success",
         });
-      })
-      .catch((error) => {
-        console.error(error);
+      } else {
         this.setState({
-          message: "There was an error uploading the image.",
+          message: "Image upload was successful, but there is an issue with the response.",
           messageType: "error",
         });
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      this.setState({
+        message: "There was an error uploading the image.",
+        messageType: "error",
       });
+    });
   } 
 
   render() {    

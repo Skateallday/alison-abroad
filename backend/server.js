@@ -4,7 +4,6 @@ const path = require('path');
 const mongoose = require('mongoose');
 
 
-
 require('dotenv').config();
 
 const app = express();
@@ -28,16 +27,20 @@ connection.once('open', () => {
 
 app.use(express.static(path.join(__dirname, 'images')));
 
+
+app.listen(port, () => {
+    console.log(`Server is running on port: ${port}`);
+
+});
+
 const imageRouter = require('./routes/images');
 const usersRouter = require('./routes/users');
 
 app.use('/users', usersRouter);
 app.use('/images', imageRouter);
 
-app.listen(port, () => {
-  console.log(`Server is running on port: ${port}`);
 
 // Middleware for handling client-side routing
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  res.sendFile(path.join(__dirname, '../build', 'index.html'));
 });

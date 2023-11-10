@@ -90,24 +90,32 @@ export default class MultiImage extends Component<any, any> {
     
 
     axios
-      .post(`${config.apiUrl}/images/add`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-      .then((res) => {
+    .post(`${config.apiUrl}/images/add`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    .then((res) => {
+      if (res.status === 200) {
+        // Check if the response status is 200 (OK) to ensure a successful upload
         this.setState({
           message: "Image uploaded successfully!",
           messageType: "success",
         });
-      })
-      .catch((error) => {
-        console.error(error);
+      } else {
         this.setState({
-          message: "There was an error uploading the image.",
+          message: "There was an issue with the server's response.",
           messageType: "error",
         });
+      }
+    })
+    .catch((error) => {
+      console.error("Error uploading image:", error);
+      this.setState({
+        message: "There was an error uploading the image.",
+        messageType: "error",
       });
+    });
   }
 
   render() {    
