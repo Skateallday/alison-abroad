@@ -27,12 +27,6 @@ connection.once('open', () => {
 
 app.use(express.static(path.join(__dirname, 'images')));
 
-
-app.listen(port, () => {
-    console.log(`Server is running on port: ${port}`);
-
-});
-
 const imageRouter = require('./routes/images');
 const usersRouter = require('./routes/users');
 
@@ -40,7 +34,15 @@ app.use('/users', usersRouter);
 app.use('/images', imageRouter);
 
 
-// Middleware for handling client-side routing
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../build', 'index.html'));
+app.get("/*", function (req, res) {
+  res.sendFile(path.join(__dirname, "../build/index.html"), function (err) {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
+});
+
+app.listen(port, () => {
+  console.log(`Server is running on port: ${port}`);
+
 });
