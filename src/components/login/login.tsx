@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
-
-
-
+import config from '../../config';
 
 export default class Login extends Component <any, any> {
     constructor (props: any){
@@ -18,10 +16,7 @@ export default class Login extends Component <any, any> {
         this.onChangeUsername = this.onChangeUsername.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-
     }
-
-
 
     onChangeUsername(e: React.ChangeEvent<any>) {
         this.setState({
@@ -40,10 +35,9 @@ export default class Login extends Component <any, any> {
             username: this.state.username,
             password: this.state.password
         };
-        
-    
+            
         axios
-            .post('http://localhost:5000/users/login', data)
+            .post(`${config.apiUrl}/users/login`, data)
             .then(res => {
                 this.setState({loggedIn : true})
                 localStorage.setItem('jwtToken', res.data.token); // Store the JWT token in localStorage

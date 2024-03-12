@@ -3,13 +3,14 @@ const cors = require('cors');
 const path = require('path');
 const mongoose = require('mongoose');
 
+
 require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(cors({
-  origin: 'http://localhost:3000', // Replace with your frontend URL
+  origin: 'https://alison-abroad.onrender.com', 
   methods: 'GET, POST, PUT, DELETE',
   credentials: true, // Enable sending cookies across origins
 }));
@@ -39,3 +40,7 @@ app.use('/users', usersRouter);
 app.use('/images', imageRouter);
 
 
+// Middleware for handling client-side routing
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../build', 'index.html'));
+});

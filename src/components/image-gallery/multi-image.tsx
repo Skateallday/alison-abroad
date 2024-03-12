@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import config from '../../config';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; // Import the CSS
 
 
 export default class MultiImage extends Component<any, any> {
@@ -90,24 +92,36 @@ export default class MultiImage extends Component<any, any> {
     
 
     axios
-      .post(`${config.apiUrl}/images/add`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-      .then((res) => {
+    .post(`${config.apiUrl}/images/add`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    .then((res) => {
+      if (res.status === 200) {
+      // Show a success toast notification
+      toast.success('Image deleted successfully', {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+        // Check if the response status is 200 (OK) to ensure a successful upload
         this.setState({
-          message: "Image uploaded successfully!",
+          message: "Images uploaded successfully!",
           messageType: "success",
         });
-      })
-      .catch((error) => {
-        console.error(error);
+      } else {
         this.setState({
-          message: "There was an error uploading the image.",
+          message: "There was an issue with the server's response.",
           messageType: "error",
         });
+      }
+    })
+    .catch((error) => {
+      console.error("Error uploading image:", error);
+      this.setState({
+        message: "There was an error uploading the image.",
+        messageType: "error",
       });
+    });
   }
 
   render() {    

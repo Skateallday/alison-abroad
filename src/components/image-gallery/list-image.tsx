@@ -44,7 +44,6 @@ const ImagesList = ({ country }: ImagesListProps) => {
 
   }));
 
-  console.log(filteredImages)
 
   
 
