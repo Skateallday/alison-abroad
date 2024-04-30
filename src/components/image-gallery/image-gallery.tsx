@@ -64,7 +64,7 @@ const ImageGallery: React.FC = () => {
         <h1 className="text-3xl py-5">Here are my {country} Images</h1>
         <h2 className="text-2xl py-5">Please select a country and subregion below</h2>
         <div className="flex flex-wrap p-4">
-          {countries.map((countryOption) => (
+          {countries.map((countryOption) => ( 
             <button
               key={countryOption}
               className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded mr-4 mb-4 ${
