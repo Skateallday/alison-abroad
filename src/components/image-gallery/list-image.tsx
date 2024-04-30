@@ -17,10 +17,10 @@ interface ImageData {
 }
 
 interface ImagesListProps {
-  country: string;
+  subregion: string;
 }
 
-const ImagesList = ({ country }: ImagesListProps) => {
+const ImagesList = ({ subregion }: ImagesListProps) => {
   const [galleries, setGalleries] = useState<ImageData[]>([]);
 
   useEffect(() => {
@@ -34,13 +34,13 @@ const ImagesList = ({ country }: ImagesListProps) => {
       });
   }, []);
 
-  // Filter images based on selected country
-  const filteredImages = galleries.filter((image) => image.country === country).map((image) => ({
+  // Filter images based on selected subregion
+  const filteredImages = galleries.filter((image) => image.subregion === subregion).map((image) => ({
       src: `${config.apiUrl}/${image.src}`,
       width: image.width,
       height: image.height,
       caption: image.country,
-      subtitle: image.subregion
+      subregion: image.subregion
 
   }));
 
@@ -63,7 +63,7 @@ return (
                     loading="lazy"
                   />
                             <ImageListItemBar
-            title={item.subtitle}
+            title={item.subregion}
           />
               </ImageListItem>
             ))}
