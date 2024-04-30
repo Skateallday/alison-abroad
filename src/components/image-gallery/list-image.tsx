@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import axios from 'axios';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
@@ -53,6 +53,7 @@ return (
     <div>
       <div className="container mx-auto px-5 py-2 lg:px-32 lg:pt-12">
         <div className="-m-1 flex flex-wrap md:-m-2">
+        <Suspense fallback={<div>Loading...</div>}>
 
             <ImageList variant="masonry" cols={3} gap={8}>
               {filteredImages.map((item, index) => (
@@ -68,7 +69,7 @@ return (
               </ImageListItem>
             ))}
           </ImageList>
-
+        </Suspense>
 
         </div>
       </div>
