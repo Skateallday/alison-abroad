@@ -42,5 +42,6 @@ app.use('/images', imageRouter);
 
 // Middleware for handling client-side routing
 app.get('*', (req, res) => {
+  res.type('text/html'); // Set the MIME type explicitly
   res.sendFile(path.join(__dirname, '../build', 'index.html'));
 });
