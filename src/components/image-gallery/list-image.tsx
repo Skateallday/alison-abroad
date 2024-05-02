@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import axios from 'axios';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
@@ -17,10 +17,10 @@ interface ImageData {
 }
 
 interface ImagesListProps {
-  country: string;
+  subregion: string;
 }
 
-const ImagesList = ({ country }: ImagesListProps) => {
+const ImagesList = ({ subregion }: ImagesListProps) => {
   const [galleries, setGalleries] = useState<ImageData[]>([]);
 
   useEffect(() => {
@@ -34,17 +34,16 @@ const ImagesList = ({ country }: ImagesListProps) => {
       });
   }, []);
 
-  // Filter images based on selected country
-  const filteredImages = galleries.filter((image) => image.country === country).map((image) => ({
+  // Filter images based on selected subregion
+  const filteredImages = galleries.filter((image) => image.subregion === subregion).map((image) => ({
       src: `${config.apiUrl}/${image.src}`,
       width: image.width,
       height: image.height,
       caption: image.country,
-      subtitle: image.subregion
+      subregion: image.subregion
 
   }));
 
-  console.log(filteredImages)
 
   
 
@@ -54,6 +53,7 @@ return (
     <div>
       <div className="container mx-auto px-5 py-2 lg:px-32 lg:pt-12">
         <div className="-m-1 flex flex-wrap md:-m-2">
+        <Suspense fallback={<div>Loading...</div>}>
 
             <ImageList variant="masonry" cols={3} gap={8}>
               {filteredImages.map((item, index) => (
@@ -64,12 +64,12 @@ return (
                     loading="lazy"
                   />
                             <ImageListItemBar
-            title={item.subtitle}
+            title={item.subregion}
           />
               </ImageListItem>
             ))}
           </ImageList>
-
+        </Suspense>
 
         </div>
       </div>
