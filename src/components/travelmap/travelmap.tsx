@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { ComposableMap, Geographies, Geography, Marker } from "react-simple-maps";
-import TravelMapData, { CountryData } from "./TravelMapData";
+import TravelMapData, { CountryData } from "./travelmapdata";
 import markers from "./markers";
 import './styles.css';
 
@@ -9,23 +9,14 @@ const geoUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
 const TravelMap: React.FC = () => {
   const [uniqueCountryData, setUniqueCountryData] = useState<CountryData[]>([]);
 
-  const handleCountryData = (data: CountryData[]) => {
+  const handleCountryData = useCallback((data: CountryData[]) => {
     setUniqueCountryData(data);
-  };
+  }, []);
 
   return (
     <div className="bg-gray-700 grid grid-cols-2 md:grid-cols-2">
       <div>
         <h1 className="text-2xl text-left text-white py-8 px-4">Explore Alison's Interactive Travel Map</h1>
-        <ul>
-          {uniqueCountryData.map((countryData) => (
-            <li key={countryData.country}>
-              {countryData.country} (Occurrences: {countryData.count})
-            </li>
-          ))}
-        </ul>
-
-        <TravelMapData onCountryData={handleCountryData} />
 
         <p className="text-left text-white py-1 px-4">
           Welcome to Alison's interactive travel map! This map allows you to embark on a virtual journey through 
@@ -91,6 +82,7 @@ const TravelMap: React.FC = () => {
             return null;
           })}
         </ComposableMap>
+        <TravelMapData onCountryData={handleCountryData} />
       </div>
     </div>
   );

@@ -31,7 +31,7 @@ const isAuthenticated = () => {
         <Route path='/' element={<Home />} />
         <Route path='/home' element={<Home />} />
         <Route path='/image-gallery' element={<ImageGallery />} />
-        <Route path='/travel-map' element={<TravelMap geographies={[]} geo={''}/>} />
+        <Route path='/travel-map' element={<TravelMap />} />
         <Route path="/edit/:id" element={<ProtectedRoute element={<EditImage />} path="/edit/:id" />} />
         <Route path="/create-image" element={<ProtectedRoute element={<CreateImage />} path="/create-image" />} />
         <Route path="/create-user" element={<ProtectedRoute element={<CreateUser />} path="/create-user" />} />
