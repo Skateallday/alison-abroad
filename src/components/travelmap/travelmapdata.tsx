@@ -1,4 +1,3 @@
-// TravelMapData.tsx
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 
@@ -22,7 +21,7 @@ interface TravelMapDataProps {
 }
 
 const TravelMapData: React.FC<TravelMapDataProps> = ({ onCountryData }) => {
-    const [isLoading, setIsLoading] = useState(true); // Add a loading state
+  const [isLoading, setIsLoading] = useState(true); // Add a loading state
 
   useEffect(() => {
     axios
@@ -49,12 +48,12 @@ const TravelMapData: React.FC<TravelMapDataProps> = ({ onCountryData }) => {
         // Call the prop function with the uniqueCountriesData
         onCountryData(uniqueCountriesData);
         setIsLoading(false); // Data has been fetched, so set isLoading to false
-
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []); // Add onCountryData as a dependency for useEffect
+  }, [onCountryData]); // Add onCountryData as a dependency for useEffect
+
   if (isLoading) {
     return <p>Loading...</p>; // Display a loading message while fetching data
   }
