@@ -55,6 +55,8 @@
     "webpack": "^5.38.1"
   },
   "scripts": {
+    "install-server": "cd backend && npm install",
+    "start-server": "cd backend && node server.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
