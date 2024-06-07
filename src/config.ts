@@ -1,6 +1,6 @@
 //config.ts
 const config = {
-    apiUrl:'http://localhost:5000', // Development URL
+    apiUrl:'https://alison-abroad-n586.onrender.com/', // Development URL
 };
 
 export default config;
