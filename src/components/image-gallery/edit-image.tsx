@@ -55,7 +55,9 @@ const EditImage = ({ galleries, setGalleries }: { galleries: ImagesProps[]; setG
         setGalleries(prevGalleries => prevGalleries.filter(image => image._id !== imageId));
       })
       .catch((error) => {
-        console.error('Error deleting image:', error.message);
+        toast.success('Error deleting image:' + error.message, {
+          position: toast.POSITION.TOP_RIGHT,
+        });
       });
   };
   };
