@@ -35,8 +35,8 @@ const isAuthenticated = () => {
         <Route path="/edit/:id" element={<ProtectedRoute element={<EditImage />} path="/edit/:id" />} />
         <Route path="/create-image" element={<ProtectedRoute element={<CreateImage />} path="/create-image" />} />
         <Route path="/create-user" element={<ProtectedRoute element={<CreateUser />} path="/create-user" />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<ProtectedRoute element={<Login />} path="/login" />} />
+        <Route path="/register" element={<ProtectedRoute element={<Register />} path="/register" />} />
       </Routes>
     );
   }

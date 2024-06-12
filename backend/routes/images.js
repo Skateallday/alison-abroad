@@ -1,9 +1,8 @@
 const router = require('express').Router();
 const multer = require('multer');
 const { v4: uuidv4 } = require('uuid');
-
-let path = require('path');
-let Image = require('../models/images.models');
+const path = require('path');
+const Image = require('../models/images.models');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -28,10 +27,14 @@ const upload = multer({ storage, fileFilter });
 router.route('/').get((req, res) => {
   Image.find()
     .then(images => res.json(images))
-    .catch(err => res.status(400).json('Error: ' + err));
+    .catch(err => res.status(400).json({ error: 'Error: ' + err.message }));
 });
 
 router.route('/add').post(upload.array('src'), (req, res) => {
+  console.log('POST request to /add received');
+  console.log('Request body:', req.body);
+  console.log('Files:', req.files);
+
   const { width, height, country, subregion, caption } = req.body;
   const images = req.files.map(file => ({ src: file.filename }));
 
@@ -44,11 +47,15 @@ router.route('/add').post(upload.array('src'), (req, res) => {
       subregion: subregion,
       caption: caption
     });
-  });  Image.insertMany(newImages)
-    .then(() => res.json('Images added!'))
-    .catch(err => res.status(400).json({ error: err.message }));
-});
+  });
 
+  Image.insertMany(newImages)
+    .then(() => res.json({ message: 'Images added!' }))
+    .catch(err => {
+      console.error('Error inserting images:', err);
+      res.status(400).json({ error: err.message });
+    });
+});
 
 router.get('/images/:filename', (req, res) => {
   const filename = req.params.filename;
@@ -60,9 +67,8 @@ router.put('/:id', async (req, res) => {
   console.log('PUT request to /images/:id received');
 
   try {
-    const id = req.params.id.trim(); // Get the image ID from the request parameters
+    const id = req.params.id.trim();
 
-    // Use the `Image` model to update the image with the specified ID using the data from the request body
     const updatedImage = await Image.findByIdAndUpdate(id, req.body, { new: true });
 
     if (!updatedImage) {
@@ -80,9 +86,8 @@ router.delete('/:id', async (req, res) => {
   console.log('Delete request to /images/:id received');
 
   try {
-    const id = req.params.id.trim(); // Get the image ID from the request parameters
+    const id = req.params.id.trim();
 
-    // Use the `Image` model to delete the image with the specified ID from the database
     const deletedItem = await Image.findByIdAndDelete(id);
 
     if (!deletedItem) {
