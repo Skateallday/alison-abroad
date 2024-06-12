@@ -27,7 +27,10 @@ const upload = multer({ storage, fileFilter });
 router.route('/').get((req, res) => {
   Image.find()
     .then(images => res.json(images))
-    .catch(err => res.status(400).json({ error: 'Error: ' + err.message }));
+    .catch(err => {
+      console.error('Error fetching images:', err);
+      res.status(500).json({ error: 'Internal server error' });
+    });
 });
 
 router.route('/add').post(upload.array('src'), (req, res) => {
@@ -36,6 +39,13 @@ router.route('/add').post(upload.array('src'), (req, res) => {
   console.log('Files:', req.files);
 
   const { width, height, country, subregion, caption } = req.body;
+
+  // Validate request data
+  if (!width || !height || !country || !subregion || !caption || req.files.length === 0) {
+    console.error('Invalid request data:', req.body);
+    return res.status(400).json({ error: 'Invalid request data' });
+  }
+
   const images = req.files.map(file => ({ src: file.filename }));
 
   const newImages = images.map(image => {
@@ -53,14 +63,19 @@ router.route('/add').post(upload.array('src'), (req, res) => {
     .then(() => res.json({ message: 'Images added!' }))
     .catch(err => {
       console.error('Error inserting images:', err);
-      res.status(400).json({ error: err.message });
+      res.status(500).json({ error: 'Internal server error' });
     });
 });
 
 router.get('/images/:filename', (req, res) => {
   const filename = req.params.filename;
   const filepath = path.join(__dirname, '../images', filename);
-  res.sendFile(filepath);
+  res.sendFile(filepath, err => {
+    if (err) {
+      console.error('Error sending file:', err);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
 });
 
 router.put('/:id', async (req, res) => {
@@ -68,7 +83,6 @@ router.put('/:id', async (req, res) => {
 
   try {
     const id = req.params.id.trim();
-
     const updatedImage = await Image.findByIdAndUpdate(id, req.body, { new: true });
 
     if (!updatedImage) {
@@ -77,8 +91,8 @@ router.put('/:id', async (req, res) => {
 
     return res.json({ message: 'Image updated successfully', updatedImage });
   } catch (err) {
-    console.error(err);
-    return res.status(500).json({ message: 'Internal server error... ask Marc for help' });
+    console.error('Error updating image:', err);
+    return res.status(500).json({ message: 'Internal server error' });
   }
 });
 
@@ -87,7 +101,6 @@ router.delete('/:id', async (req, res) => {
 
   try {
     const id = req.params.id.trim();
-
     const deletedItem = await Image.findByIdAndDelete(id);
 
     if (!deletedItem) {
@@ -96,8 +109,8 @@ router.delete('/:id', async (req, res) => {
 
     return res.json({ message: 'Image deleted successfully', deletedItem });
   } catch (err) {
-    console.error(err);
-    return res.status(500).json({ message: 'Internal server error... ask Marc for help' });
+    console.error('Error deleting image:', err);
+    return res.status(500).json({ message: 'Internal server error' });
   }
 });
 
