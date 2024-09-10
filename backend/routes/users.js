@@ -85,8 +85,10 @@ router.route("/login").post((request, response) => {
           );
                     // set JWT as an HTTP-only cookie with secure and SameSite attributes
           response.cookie('jwtToken', token, {
-            withCredentials: true,
-            httpOnly: false,
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production', // Use secure cookies in production (HTTPS)
+            sameSite: 'Strict', // Prevent CSRF attacks
+            maxAge: 3600000, // 1 hour expiration
             
           });
           // return success response

@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { login } from '../interfaces/login'
 import { Navigate } from 'react-router-dom';
 import config from '../../config';
 
 
 
 
-export default class Login extends Component <any, any> {
+export default class Login extends Component<{}, login> {
     constructor (props: any){
         super(props);
 
         this.state = {
-            username : String,
-            password : String,
+            username : '',
+            password : '',
             loggedIn : false
         }
 
@@ -44,15 +45,13 @@ export default class Login extends Component <any, any> {
         
     
         axios
-            .post(`${config.apiUrl}/users/login`, data)
-            .then(res => {
-                this.setState({loggedIn : true})
-                localStorage.setItem('jwtToken', res.data.token); // Store the JWT token in localStorage
-                alert("Logged In Successfully")
+            .post(`${config.apiUrl}/users/login`, data, { withCredentials: true })
+            .then((res) => {
+                alert("Logged In Successfully");
             })
             .catch(error => {
                 console.error(error);
-                alert("Login Failed. Please try again.");
+                alert("Login Failed. Please try again." );
             });
     }
 
@@ -79,8 +78,7 @@ export default class Login extends Component <any, any> {
 
        
         <form 
-            onSubmit={this.onSubmit} 
-            encType='multipart/form-data'>
+            onSubmit={this.onSubmit} >
 
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2">
