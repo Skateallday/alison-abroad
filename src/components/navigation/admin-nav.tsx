@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { HashRouter as  Route, Link } from 'react-router-dom'
+import { HashRouter as  Link } from 'react-router-dom'
 import Logout from "../login/logout";
 import "./nav.css"
 

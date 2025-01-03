@@ -9,7 +9,7 @@ function footer() {
       <div className="container">
         <div className="row">
           <div className="col-12">
-            <p>Made with &#10084; by <a target="_blank" href="https://www.jamfish.co.uk/">Jamfish</a>
+            <p>Made with &#10084; by <a title="Visit Jamfish Web Development" target="_blank" rel="noreferrer"  href="https://www.jamfish.co.uk/">Jamfish</a>
             </p>
           </div>
         </div>
