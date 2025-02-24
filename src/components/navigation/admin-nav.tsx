@@ -1,37 +1,24 @@
 import { useState } from "react";
 import {  Link } from 'react-router-dom'
 import Logout from "../login/logout";
-import "./nav.css"
-
+import "./nav.css";
 
 export default function AdminNavBar() {
     const [navbar, setNavbar] = useState(false);
 
-
-    // Function to check if the user is authenticated
+    // Check if the user is authenticated
     const isAuthenticated = () => {
-    // Get the token from local storage
-    const token = localStorage.getItem('jwtToken');
-  
-    // Check if the token exists
-    return token !== null;
-    }
+        const token = localStorage.getItem("jwtToken");
+        return token !== null;
+    };
 
-    const adminDisplay = isAuthenticated() ? 'block' : 'none';
-
-
-    
+    if (!isAuthenticated()) return null; // Only render if authenticated
 
     return (
-<div>
-<nav style={{display: adminDisplay}} className='w-full bg-green-500 shadow AdminNav'  >
-
-            <div>
-            
-            <div  className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
-            
-                    <div className="flex items-center justify-between py-3 md:py-5 md:block">
-                        
+        <Router>
+            <nav className="w-full bg-green-500 shadow AdminNav">
+                <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
+                    <div className="flex items-center justify-between py-3 md:py-5">
                         <div className="md:hidden">
                             <button
                                 className="p-2 text-green-700 rounded-md outline-none focus:border-green-400 focus:border"
@@ -78,23 +65,21 @@ export default function AdminNavBar() {
                     >
                         <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
                             <li className="text-white font-bold hover:text-blue-600">
-                            <Link to='/home'>ADMIN</Link>
+                                <Link to="/home">ADMIN</Link>
                             </li>
                             <li className="text-white font-bold hover:text-blue-600">
-                            <Link to='/create-image'>NEW</Link>
+                                <Link to="/create-image">NEW</Link>
                             </li>
                             <li className="text-white font-bold hover:text-blue-600">
-                            <Link to='/edit/:id'>EDIT</Link>
+                                <Link to={`/edit/123`}>EDIT</Link> {/* Example dynamic ID */}
                             </li>
                             <li className="text-red-600 font-bold hover:text-blue-600">
-                                {Logout()}
+                                <Logout />
                             </li>
                         </ul>
-                       
                     </div>
                 </div>
-            </div>
-        </nav>
-        </div>
+            </nav>
+        </Router>
     );
 }

@@ -1,9 +1,16 @@
 const router = require('express').Router();
+const rateLimit = require('express-rate-limit');
 const multer = require('multer');
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
 const Image = require('../models/images.models');
 const rateLimit = require('express-rate-limit');
+
+// set up rate limiter: maximum of 100 requests per 15 minutes
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // max 100 requests per windowMs
+});
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -80,7 +87,7 @@ router.route('/add', imageUploadLimiter, upload.array('src'), (req, res) => {
     });
 });
 
-router.get('/images/:filename', (req, res) => {
+router.get('/images/:filename', limiter, (req, res) => {
   const filename = req.params.filename;
   const filepath = path.join(__dirname, '../images', filename);
 

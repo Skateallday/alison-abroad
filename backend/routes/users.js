@@ -11,6 +11,10 @@ router.route('/').get((req, res) => {
 });
 
 
+router.route("/register").get((req, res) => {
+  res.json({message: 'Loaded'})
+})
+
 router.route('/register').post((request, response) => {
   // hash the password
   bcrypt
@@ -54,6 +58,12 @@ router.route('/register').post((request, response) => {
     });
 
 });
+
+router.route("/login").get((req, res) => {
+  console.log('loaded')
+  res.json({message: 'Loaded'})
+})
+
 router.route("/login").post((request, response) => {
   // check if email exists
   User.findOne({ username: request.body.username })

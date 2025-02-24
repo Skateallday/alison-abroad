@@ -3,6 +3,7 @@ const cors = require('cors');
 const path = require('path');
 const mongoose = require('mongoose');
 
+
 require('dotenv').config();
 
 const app = express();
@@ -41,3 +42,8 @@ app.listen(port, () => {
 });
 
 
+// Middleware for handling client-side routing
+app.get('*', (req, res) => {
+  res.type('text/html'); // Set the MIME type explicitly
+  res.sendFile(path.join(__dirname, '../build', 'index.html'));
+});

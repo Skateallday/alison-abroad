@@ -48,9 +48,15 @@ const ImageGallery: React.FC = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, [country]);
+  }, []);
 
+  const handleCountryChange = (selectCountry: string) => {
+    setCountry(selectCountry);
+  };
 
+  const handleSubregionChange = (selectSubregion: string) => {
+    setCountry(selectSubregion);
+  };
 
   return (
     <div className="App-header">

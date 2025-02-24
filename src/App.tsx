@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import { hydrate } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom'
 //import Navigation from './components/routes/routes';
 import Navigation from './components/routes/routes';
