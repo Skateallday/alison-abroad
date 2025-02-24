@@ -3,6 +3,7 @@ const multer = require('multer');
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
 const Image = require('../models/images.models');
+const rateLimit = require('express-rate-limit');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -18,9 +19,21 @@ const fileFilter = (req, file, cb) => {
   if (allowedFileTypes.includes(file.mimetype)) {
     cb(null, true);
   } else {
-    cb(null, false);
+    cb(new Error('Invalid file type. Only JPEG and PNG image files are allowed.'), false);
   }
 };
+
+const imageUploadLimiter = rateLimit({
+  windowsMS: 15 * 60* 1000,
+  max: 15,
+  message: 'You have exceeded the 15 image uploads in 15 minutes limit!'
+});
+
+const generalLimiter = rateLimit({
+  windowsMS: 15 * 60* 1000,
+  max: 100,
+  message: 'You have exceeded the 100 requests in 15 minutes limit!'
+});
 
 const upload = multer({ storage, fileFilter });
 
@@ -33,7 +46,7 @@ router.route('/').get((req, res) => {
     });
 });
 
-router.route('/add').post(upload.array('src'), (req, res) => {
+router.route('/add', imageUploadLimiter, upload.array('src'), (req, res) => {
   console.log('POST request to /add received');
   console.log('Request body:', req.body);
   console.log('Files:', req.files);
@@ -70,6 +83,10 @@ router.route('/add').post(upload.array('src'), (req, res) => {
 router.get('/images/:filename', (req, res) => {
   const filename = req.params.filename;
   const filepath = path.join(__dirname, '../images', filename);
+
+  if (!filepath.startsWith(path.resolve(__dirname, '../images'))) {
+    return res.status(403).json({ error: 'Forbidden' });
+  }
   res.sendFile(filepath, err => {
     if (err) {
       console.error('Error sending file:', err);
