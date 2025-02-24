@@ -35,6 +35,12 @@ const generalLimiter = rateLimit({
   message: 'You have exceeded the 100 requests in 15 minutes limit!'
 });
 
+const imageDownloadLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 50, // max 50 requests per windowMs
+  message: 'You have exceeded the 50 requests in 15 minutes limit!'
+});
+
 const upload = multer({ storage, fileFilter });
 
 router.route('/').get((req, res) => {
@@ -80,7 +86,7 @@ router.route('/add', imageUploadLimiter, upload.array('src'), (req, res) => {
     });
 });
 
-router.get('/images/:filename', (req, res) => {
+router.get('/images/:filename', imageDownloadLimiter, (req, res) => {
   const filename = req.params.filename;
   const filepath = path.join(__dirname, '../images', filename);
 
