@@ -69,8 +69,12 @@ router.put('/:id', async (req, res) => {
   try {
     const id = req.params.id.trim(); // Get the image ID from the request parameters
 
-    // Use the `Image` model to update the image with the specified ID using the data from the request body
-    const updatedImage = await Image.findByIdAndUpdate(id, req.body, { new: true });
+    // Extract the fields to be updated from the request body
+    const { width, height, country, subregion, caption } = req.body;
+    const updateData = { $set: { width, height, country, subregion, caption } };
+
+    // Use the `Image` model to update the image with the specified ID using the sanitized data
+    const updatedImage = await Image.findByIdAndUpdate(id, updateData, { new: true });
 
     if (!updatedImage) {
       return res.status(404).json({ message: 'Image not found' });
