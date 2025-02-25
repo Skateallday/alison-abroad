@@ -73,7 +73,7 @@ router.route("/login").get(generalLimiter,(req, res) => {
 
 router.route("/login").post(generalLimiter,(request, response) => {
   // check if email exists
-  User.findOne({ username: request.body.username })
+  User.findOne({ username: {$eq: request.body.username}})
     .then((user) => {
       // compare the password entered and the hashed password found
       bcrypt.compare(request.body.password, user.password)

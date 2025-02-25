@@ -107,7 +107,14 @@ router.put('/:id',generalLimiter, async (req, res) => {
 
   try {
     const id = req.params.id.trim();
-    const updatedImage = await Image.findByIdAndUpdate(id, req.body, { new: true });
+    const updateData= {};
+    const allowedFields = ['src', 'width', 'height', 'country', 'subregion', 'caption'];
+        for (const key of Object.keys(req.body)) {
+          if (allowedFields.includes(key)) {
+            updateData[key] = req.body[key];}
+          }
+
+    const updatedImage = await Image.findByIdAndUpdate(id, {$set: updateData}, { new: true });
 
     if (!updatedImage) {
       return res.status(404).json({ message: 'Image not found' });
