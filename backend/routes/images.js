@@ -4,13 +4,7 @@ const multer = require('multer');
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
 const Image = require('../models/images.models');
-const rateLimit = require('express-rate-limit');
 
-// set up rate limiter: maximum of 100 requests per 15 minutes
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // max 100 requests per windowMs
-});
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -50,7 +44,7 @@ const imageDownloadLimiter = rateLimit({
 
 const upload = multer({ storage, fileFilter });
 
-router.route('/').get((req, res) => {
+router.route('/').get(generalLimiter, (req, res) => {
   Image.find()
     .then(images => res.json(images))
     .catch(err => {
@@ -126,7 +120,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', generalLimiter, async (req, res) => {
   console.log('Delete request to /images/:id received');
 
   try {

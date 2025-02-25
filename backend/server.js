@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+const rateLimit = require('express-rate-limit');
 
 dotenv.config();
 
@@ -13,6 +14,11 @@ const __dirname = dirname(__filename);
 
 const app = express();
 const port = process.env.PORT || 5000;
+const generalLimiter = rateLimit({
+  windowsMS: 15 * 60* 1000,
+  max: 5,
+  message: 'You have exceeded the 5 requests in 15 minutes limit!'
+});
 
 app.use(cors({
   origin: 'https://alison-abroad.onrender.com',
@@ -40,14 +46,14 @@ import imageRouter from './routes/images.js';
 import usersRouter from './routes/users.js';
 
 // Serve static files
-app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use('/images', generalLimiter, express.static(path.join(__dirname, 'images')));
 
 // Use Routes
 app.use('/users', usersRouter);
 app.use('/images', imageRouter);
 
 // Middleware for handling client-side routing (MUST be before app.listen)
-app.get('*', (req, res) => {
+app.get('*', generalLimiter, (req, res) => {
   res.type('text/html'); // Set the MIME type explicitly
   res.sendFile(path.join(__dirname, '../build', 'index.html'));
 });

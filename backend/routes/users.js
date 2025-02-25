@@ -1,21 +1,28 @@
 const router = require('express').Router();
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken");
-const crypto = require('crypto');
+const rateLimit = require('express-rate-limit');
 let User = require('../models/user.model');
 
-router.route('/').get((req, res) => {
+const generalLimiter = rateLimit({
+  windowsMS: 15 * 60* 1000,
+  max: 5,
+  message: 'You have exceeded the 5 requests in 15 minutes limit!'
+});
+
+
+router.route('/').get(generalLimiter, (req, res) => {
   User.find()
     .then(users => res.json(users))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
 
-router.route("/register").get((req, res) => {
+router.route("/register").get(generalLimiter, (req, res) => {
   res.json({message: 'Loaded'})
 })
 
-router.route('/register').post((request, response) => {
+router.route('/register').post(generalLimiter, (request, response) => {
   // hash the password
   bcrypt
     .hash(request.body.password, 10)
@@ -59,12 +66,12 @@ router.route('/register').post((request, response) => {
 
 });
 
-router.route("/login").get((req, res) => {
+router.route("/login").get(generalLimiter,(req, res) => {
   console.log('loaded')
   res.json({message: 'Loaded'})
 })
 
-router.route("/login").post((request, response) => {
+router.route("/login").post(generalLimiter,(request, response) => {
   // check if email exists
   User.findOne({ username: request.body.username })
     .then((user) => {
