@@ -12,8 +12,8 @@ export default class MultiImage extends Component<any, any> {
     
     this.state = {
       src: String,
-      width: Number,
-      height: Number,
+      width: 0,
+      height: 0,
       country: "",
       subregion: String,
       caption: String,
@@ -60,8 +60,8 @@ export default class MultiImage extends Component<any, any> {
     this.setState({
       src: "",
       srcName: "",
-      width: "",
-      height: "",
+      width: 0,
+      height: 0,
       country: "",
       subregion: "",
       caption: "",

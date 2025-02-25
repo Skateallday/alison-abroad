@@ -30,36 +30,31 @@ router.route('/register').post((request, response) => {
         .save()
         // return success if the new user is added to the database successfully
         .then((result) => {
+          const alertMessage = `Thanks you for registering ${request.body.username}, you can now login`;
           response.status(201).send({
             message: "User Created Successfully",
             result,
-            alert: `Thanks you for registering ${request.body.username}`,
-
-
           });
-
+          console.log(alertMessage);
         })
         // catch error if the new user wasn't added successfully to the database
         .catch((error) => {
+          const alertMessage = "An error has triggered, please try again. If the issue keeps happening contact admin";
           response.status(500).send({
             message: "Error creating user",
             error,
-            alert:"An error has triggered, please try again. If the issue keeps happening contact admin",
-            
-
           });
-
+          console.log(alertMessage);
         });
     })
     // catch error if the password hash isn't successful
     .catch((e) => {
+      const alertMessage = "An error has triggered with the password hashing, please try again. If the issue keeps happening contact admin";
       response.status(500).send({
         message: "Password was not hashed successfully",
         e,
-        alert:"An error has triggered with the password hashing, please try again. If the issue keeps happening contact admin",
-
       });
-
+      console.log(alertMessage);
     });
 
 });
@@ -79,10 +74,9 @@ router.route("/login").post((request, response) => {
           if (!passwordCheck) {
             response.status(400).send({
               message: "Passwords do not match",
-              error,
+              error: new Error("Passwords do not match"),
             });
           }
-          const randomString = crypto.randomBytes(32).toString('hex');
 
           // create JWT token
           const token = jwt.sign(
@@ -90,13 +84,15 @@ router.route("/login").post((request, response) => {
               userId: user._id,
               userName: user.username,
             },
-            randomString,
+            process.env.JWT_SECRET,
             { expiresIn: "1h" }
           );
                     // set JWT as an HTTP-only cookie with secure and SameSite attributes
           response.cookie('jwtToken', token, {
-            withCredentials: true,
             httpOnly: true,
+            secure: process.env.NODE_ENV === 'production', // Use secure cookies in production (HTTPS)
+            sameSite: 'Strict', // Prevent CSRF attacks
+            maxAge: 3600000, // 1 hour expiration
             
           });
           // return success response
@@ -115,7 +111,7 @@ router.route("/login").post((request, response) => {
     })
     .catch((e) => {
       response.status(404).send({
-        message: "Email not found",
+        message: "Username not found",
         e,
       });
     });

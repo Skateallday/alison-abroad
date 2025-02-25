@@ -1,119 +1,119 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
 import config from '../../config';
 
-export default class Login extends Component <any, any> {
-    constructor (props: any){
-        super(props);
-
-        this.state = {
-            username : String,
-            password : String,
-            loggedIn : false
-        }
-
-        this.onChangeUsername = this.onChangeUsername.bind(this);
-        this.onChangePassword = this.onChangePassword.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-    }
-
-    onChangeUsername(e: React.ChangeEvent<any>) {
-        this.setState({
-            username: e.target.value
-        });
-    }
-    onChangePassword(e: React.ChangeEvent<any>) {
-        this.setState({
-            password: e.target.value
-        });
-    }
-
-    onSubmit(e: React.ChangeEvent<any>) {
-        e.preventDefault();
-        const data = {
-            username: this.state.username,
-            password: this.state.password
-        };
-            
-        axios
-            .post(`${config.apiUrl}/users/login`, data)
-            .then(res => {
-                this.setState({loggedIn : true})
-                localStorage.setItem('jwtToken', res.data.token); // Store the JWT token in localStorage
-                alert("Logged In Successfully")
-            })
-            .catch(error => {
-                console.error(error);
-                alert("Login Failed. Please try again.");
-            });
-    }
-
-  render() {
-    if (this.state.loggedIn === true ) {
-        return <Navigate to = {{ pathname: "/create-image" }} />;
-
-    }
-    return (
-
-      <div>
-
-        <div className="bg-indigo-500 pt-5 min-h-screen">
-        <div className="flex justify-center">
-            <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-            <div className="flex justify-center">
-                <img 
-                    alt=""
-                    className="h-14 w-14"
-                    src="https://ik.imagekit.io/pibjyepn7p9/Lilac_Navy_Simple_Line_Business_Logo_CGktk8RHK.png?ik-sdk-version=javascript-1.4.3&updatedAt=1649962071315"/>
-            </div> 
-        
-            <h3>Welcome back Alison</h3>
-
-       
-        <form 
-            onSubmit={this.onSubmit} 
-            encType='multipart/form-data'>
-
-                <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2">
-                    Username:
-                    </label>
-                    <input 
-                        required
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
-                        type="text" 
-                        name='username'
-                        value={this.state.username}
-                        onChange={this.onChangeUsername}
-                    />
-                </div>
-                <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2">
-                    Password:
-                    </label>
-                    <input 
-                        required
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
-                        type="password" 
-                        name='password'
-                        value={this.state.password}
-                        onChange={this.onChangePassword}
-                    />
-                </div>
-                <div className="flex items-center justify-between">
-                    <input 
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
-                        type="submit"
-                        value="Login"
-                        />
-                </div>
-            </form>
-            </div>
-            </div>      
-        
-      </div>
-      </div>
-    )
-  }
+interface LoginState {
+  username: string;
+  password: string;
+  loggedIn: boolean;
+  loading: boolean;
+  error: string | null;
 }
+
+const Login: React.FC = () => {
+  const [state, setState] = useState<LoginState>({
+    username: '',
+    password: '',
+    loggedIn: false,
+    loading: false,
+    error: null,
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setState((prevState) => ({ ...prevState, loading: true, error: null }));
+
+    try {
+      const { username, password } = state;
+      const response = await axios.post(
+        `${config.apiUrl}/users/login`,
+        { username, password },
+        { withCredentials: true }
+      );
+      setState((prevState) => ({
+        ...prevState,
+        loggedIn: true,
+        loading: false,
+      }));
+      alert('Logged in successfully');
+    } catch (error) {
+      setState((prevState) => ({
+        ...prevState,
+        loading: false,
+        error: 'Login failed. Please try again.',
+      }));
+      console.error(error);
+    }
+  };
+
+  if (state.loggedIn) {
+    return <Navigate to="/create-image" />;
+  }
+
+  return (
+    <div className="bg-indigo-500 pt-5 min-h-screen">
+      <div className="flex justify-center">
+        <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+          <div className="flex justify-center">
+            <img
+              alt="Logo"
+              className="h-14 w-14"
+              src="https://ik.imagekit.io/pibjyepn7p9/Lilac_Navy_Simple_Line_Business_Logo_CGktk8RHK.png"
+            />
+          </div>
+          <h3>Welcome back Alison</h3>
+
+          <form onSubmit={handleSubmit}>
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Username:
+              </label>
+              <input
+                required
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                type="text"
+                name="username"
+                value={state.username}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Password:
+              </label>
+              <input
+                required
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                type="password"
+                name="password"
+                value={state.password}
+                onChange={handleInputChange}
+              />
+            </div>
+            {state.error && <p className="text-red-500">{state.error}</p>}
+            <div className="flex items-center justify-between">
+              <button
+                type="submit"
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                disabled={state.loading}
+              >
+                {state.loading ? 'Logging in...' : 'Login'}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Login;

@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
 
 // Middleware for JWT token validation
 function authenticateToken(req, res, next) {
@@ -12,7 +12,7 @@ function authenticateToken(req, res, next) {
 
   try {
     // Verify and decode the JWT token
-    const decodedToken = jwt.verify(token, process.env.secret_key);
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
 
     // Add the decoded token to the request object for further use
     req.decodedToken = decodedToken;
@@ -20,10 +20,9 @@ function authenticateToken(req, res, next) {
     // Call the next middleware
     next();
   } catch (error) {
-    return res.status(401).json({ message: 'Invalid token' });
+    console.error('Token verification failed:', error);
+    return res.status(401).json({ message: `Invalid token: ${error.message}` });
   }
 }
+export { authenticateToken };
 
-module.exports = {
-  authenticateToken,
-};

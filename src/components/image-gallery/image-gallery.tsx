@@ -48,7 +48,7 @@ const ImageGallery: React.FC = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, [country]);
+  }, []);
 
   const handleCountryChange = (selectCountry: string) => {
     setCountry(selectCountry);
