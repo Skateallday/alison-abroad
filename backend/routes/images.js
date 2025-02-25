@@ -102,7 +102,7 @@ router.get('/images/:filename', imageDownloadLimiter, (req, res) => {
   });
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/:id',generalLimiter, async (req, res) => {
   console.log('PUT request to /images/:id received');
 
   try {
