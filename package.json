@@ -81,7 +81,7 @@
     ]
   },
   "devDependencies": {
-    "@types/axios": "^0.14.0",
+    "@types/axios": "^0.14.4",
     "@types/isotope-layout": "^3.0.9",
     "@types/multer": "^1.4.7",
     "@types/react-responsive-masonry": "^2.1.0",
