@@ -1,8 +1,10 @@
-const router = require('express').Router();
-const bcrypt = require("bcrypt")
-const jwt = require("jsonwebtoken");
-const rateLimit = require('express-rate-limit');
-let User = require('../models/user.model');
+import { Router } from 'express';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import rateLimit from 'express-rate-limit';
+import User from '../models/user.model.js';
+
+const router = Router();
 
 const generalLimiter = rateLimit({
   windowsMS: 15 * 60* 1000,
@@ -124,4 +126,4 @@ router.route("/login").post(generalLimiter,(request, response) => {
     });
 });
 
-module.exports = router;
+export default router;

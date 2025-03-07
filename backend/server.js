@@ -5,7 +5,14 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-const rateLimit = require('express-rate-limit');
+
+
+import usersRouter from './routes/users.js';
+import imageRouter from './routes/images.js';
+
+import rateLimit from 'express-rate-limit';
+
+
 
 dotenv.config();
 
@@ -41,9 +48,7 @@ mongoose.connect(uri)
     process.exit(1);
   });
 
-// Import Routes
-import imageRouter from './routes/images.js';
-import usersRouter from './routes/users.js';
+
 
 // Serve static files
 app.use('/images', generalLimiter, express.static(path.join(__dirname, 'images')));

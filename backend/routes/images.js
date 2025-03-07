@@ -1,9 +1,11 @@
-const router = require('express').Router();
-const rateLimit = require('express-rate-limit');
-const multer = require('multer');
-const { v4: uuidv4 } = require('uuid');
-const path = require('path');
-const Image = require('../models/images.models');
+import { Router } from 'express';
+import rateLimit from 'express-rate-limit';
+import multer from 'multer';
+import { v4 as uuidv4 } from 'uuid';
+import path from 'path';
+import Image from '../models/images.models.js';
+
+const router = Router();
 
 
 const storage = multer.diskStorage({
@@ -145,4 +147,4 @@ router.delete('/:id', generalLimiter, async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
