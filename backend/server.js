@@ -28,7 +28,7 @@ const generalLimiter = rateLimit({
 });
 
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: 'https://alison-abroad.onrender.com',
   methods: 'GET, POST, PUT, DELETE',
   credentials: true, // Enable sending cookies across origins
 }));
