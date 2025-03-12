@@ -7,7 +7,7 @@ import User from '../models/user.model.js';
 const router = Router();
 
 const generalLimiter = rateLimit({
-  windowsMS: 15 * 60* 1000,
+  windowsMS: 15 * 60 * 1000,
   max: 5,
   message: 'You have exceeded the 5 requests in 15 minutes limit!'
 });
@@ -21,7 +21,7 @@ router.route('/').get(generalLimiter, (req, res) => {
 
 
 router.route("/register").get(generalLimiter, (req, res) => {
-  res.json({message: 'Loaded'})
+  res.json({ message: 'Loaded' })
 })
 
 router.route('/register').post(generalLimiter, (request, response) => {
@@ -68,62 +68,55 @@ router.route('/register').post(generalLimiter, (request, response) => {
 
 });
 
-router.route("/login").get(generalLimiter,(req, res) => {
+router.route("/login").get(generalLimiter, (req, res) => {
   console.log('loaded')
-  res.json({message: 'Loaded'})
+  res.json({ message: 'Loaded' })
 })
+router.route("/login").post(generalLimiter, async (request, response) => {
+  try {
+    const user = await User.findOne({ username: request.body.username });
 
-router.route("/login").post(generalLimiter,(request, response) => {
-  // check if email exists
-  User.findOne({ username: {$eq: request.body.username}})
-    .then((user) => {
-      // compare the password entered and the hashed password found
-      bcrypt.compare(request.body.password, user.password)
-        .then((passwordCheck) => {
-          if (!passwordCheck) {
-            response.status(400).send({
-              message: "Passwords do not match",
-              error: new Error("Passwords do not match"),
-            });
-          }
+    if (!user) {
+      return response.status(400).send({ message: "Invalid username or password" });
+    }
 
-          // create JWT token
-          const token = jwt.sign(
-            {
-              userId: user._id,
-              userName: user.username,
-            },
-            process.env.JWT_SECRET,
-            { expiresIn: "1h" }
-          );
-                    // set JWT as an HTTP-only cookie with secure and SameSite attributes
-          response.cookie('jwtToken', token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production', // Use secure cookies in production (HTTPS)
-            sameSite: 'Strict', // Prevent CSRF attacks
-            maxAge: 3600000, // 1 hour expiration
-            
-          });
-          // return success response
-          response.status(200).send({
-            message: "Login Successful",
-            username: user.username,
-            token,
-          });
-        })
-        .catch((error) => {
-          response.status(400).send({
-            message: "Passwords do not match",
-            error,
-          });
-        });
-    })
-    .catch((e) => {
-      response.status(404).send({
-        message: "Username not found",
-        e,
-      });
+    const passwordCheck = await bcrypt.compare(request.body.password, user.password);
+
+    if (!passwordCheck) {
+      return response.status(400).send({ message: "Invalid username or password" });
+    }
+
+    // Create JWT token
+    const token = jwt.sign(
+      {
+        userId: user._id,
+        userName: user.username,
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+
+    // Set JWT as an HTTP-only cookie with security attributes
+    response.cookie("jwtToken", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "Strict",
+      maxAge: 3600000, // 1 hour
     });
+
+    return response.status(200).send({
+      message: "Login Successful",
+      username: user.username,
+      token,
+    });
+
+  } catch (error) {
+    return response.status(500).send({
+      message: "An error occurred during login",
+      error: error.message,
+    });
+  }
 });
+
 
 export default router;

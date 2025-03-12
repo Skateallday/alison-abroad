@@ -1,4 +1,4 @@
- import React from 'react';
+import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Home from '../home/home';
 import ImageGallery from '../image-gallery/image-gallery';
@@ -35,7 +35,7 @@ const isAuthenticated = () => {
         <Route path="/edit/:id" element={<ProtectedRoute element={<EditImage />} path="/edit/:id" />} />
         <Route path="/create-image" element={<ProtectedRoute element={<CreateImage />} path="/create-image" />} />
         <Route path="/create-user" element={<ProtectedRoute element={<CreateUser />} path="/create-user" />} />
-        <Route path="/login" element={<ProtectedRoute element={<Login />} path="/login" />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<ProtectedRoute element={<Register />} path="/register" />} />
       </Routes>
     );
