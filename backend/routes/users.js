@@ -74,7 +74,7 @@ router.route("/login").get(generalLimiter, (req, res) => {
 })
 router.route("/login").post(generalLimiter, async (request, response) => {
   try {
-    const user = await User.findOne({ username: request.body.username });
+    const user = await User.findOne({ username: { $eq: request.body.username } });
 
     if (!user) {
       return response.status(400).send({ message: "Invalid username or password" });
