@@ -72,6 +72,7 @@ router.route("/login").get(generalLimiter, (req, res) => {
   console.log('loaded')
   res.json({ message: 'Loaded' })
 })
+
 router.route("/login").post(generalLimiter, async (request, response) => {
   try {
     const user = await User.findOne({ username: request.body.username });
@@ -111,6 +112,7 @@ router.route("/login").post(generalLimiter, async (request, response) => {
     });
 
   } catch (error) {
+    console.error("Login error:", error);
     return response.status(500).send({
       message: "An error occurred during login",
       error: error.message,
