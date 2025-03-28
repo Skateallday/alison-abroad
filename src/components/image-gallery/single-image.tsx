@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import config from '../../config';
-import { toast } from 'react-toastify';
+import { ToastPosition, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; // Import the CSS
 
 
@@ -92,7 +92,7 @@ export default class SingleImage extends Component<any, any> {
     .then(() => {
         // Show a success toast notification
         toast.success('Image uploaded successfully', {
-          position: toast.POSITION.TOP_RIGHT,
+          position: "top-right" as ToastPosition,
         });
     })
     .catch((error) => {
