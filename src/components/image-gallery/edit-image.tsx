@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { ImagesProps } from '../interfaces/images';
 import config from '../../config';
-import { toast } from 'react-toastify';
+import { ToastPosition, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; // Import the CSS
 
 
@@ -48,7 +48,7 @@ const EditImage = ({ galleries, setGalleries }: { galleries: ImagesProps[]; setG
         console.log('Image deleted successfully');
         // Show a success toast notification
         toast.success('Image deleted successfully', {
-          position: toast.POSITION.TOP_RIGHT,
+          position: "top-right" as ToastPosition,
         });
 
         // Remove the deleted image from the state
@@ -56,7 +56,7 @@ const EditImage = ({ galleries, setGalleries }: { galleries: ImagesProps[]; setG
       })
       .catch((error) => {
         toast.success('Error deleting image:' + error.message, {
-          position: toast.POSITION.TOP_RIGHT,
+          position: "top-right" as ToastPosition,
         });
       });
   };
@@ -74,8 +74,8 @@ const EditImage = ({ galleries, setGalleries }: { galleries: ImagesProps[]; setG
       // You may want to update the state with the updated image data.
       // Show a success toast notification
       toast.success('Image updated successfully', {
-      position: toast.POSITION.TOP_RIGHT, // You can choose a different position
-    });
+        position: "top-right" as ToastPosition,
+      });
     })
     .catch((error) => {
       console.error('Error updating image:', error);
