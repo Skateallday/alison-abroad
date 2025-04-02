@@ -39,6 +39,11 @@ const Login: React.FC = () => {
         { username, password },
         { withCredentials: true }
       );
+
+      //Store token in local storage
+      localStorage.setItem('jwtToken', response.data.token);
+
+      
       setState((prevState) => ({
         ...prevState,
         loggedIn: true,
