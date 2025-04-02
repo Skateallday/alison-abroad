@@ -112,7 +112,8 @@ router.route("/login").post(generalLimiter, async (request, response) => {
     });
 
   } catch (error) {
-    console.error("Login error:", error);
+    console.error("Login error details:", error);
+    console.error("Error stack:", error.stack);
     return response.status(500).send({
       message: "An error occurred during login",
       error: error.message,
