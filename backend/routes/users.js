@@ -7,7 +7,7 @@ import User from '../models/user.model.js';
 const router = Router();
 
 const generalLimiter = rateLimit({
-  windowsMS: 15 * 60 * 1000,
+  windowsMs: 15 * 60 * 1000,
   max: 5,
   message: 'You have exceeded the 5 requests in 15 minutes limit!'
 });
