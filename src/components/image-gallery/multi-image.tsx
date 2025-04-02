@@ -109,6 +109,10 @@ export default class MultiImage extends Component<any, any> {
           messageType: "success",
         });
       } else {
+              // Show an error toast notification
+      toast.error("There was an issue with the server's response.", {
+        position: "top-right" as ToastPosition,
+      });
         this.setState({
           message: "There was an issue with the server's response.",
           messageType: "error",
@@ -116,6 +120,10 @@ export default class MultiImage extends Component<any, any> {
       }
     })
     .catch((error) => {
+      // Show an error toast notification
+      toast.error("There was an error uploading the image.", {
+        position: "top-right" as ToastPosition,
+    });
       console.error("Error uploading image:", error);
       this.setState({
         message: "There was an error uploading the image.",

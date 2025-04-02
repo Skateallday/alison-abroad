@@ -55,7 +55,7 @@ router.route('/').get(generalLimiter, (req, res) => {
     });
 });
 
-router.route('/add', imageUploadLimiter, upload.array('src'), (req, res) => {
+router.route('/add').post(imageUploadLimiter, upload.array('src'), (req, res) => {
   console.log('POST request to /add received');
   console.log('Request body:', req.body);
   console.log('Files:', req.files);

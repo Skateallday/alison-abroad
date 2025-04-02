@@ -9,7 +9,7 @@ export default class SingleImage extends Component<any, any> {
   constructor(props: any) {
     super(props);
 
-    
+
     this.state = {
       src: String,
       width: Number,
@@ -41,7 +41,7 @@ export default class SingleImage extends Component<any, any> {
   }
   onChangeCountry(e: React.ChangeEvent<any>) {
     this.setState({
-      country :e.target.value,
+      country: e.target.value,
     })
   }
   onChangeSubregion(e: React.ChangeEvent<any>) {
@@ -72,7 +72,7 @@ export default class SingleImage extends Component<any, any> {
 
   onSubmit(e: React.ChangeEvent<any>) {
     e.preventDefault();
-    
+
     const capitalizedCountry = this.state.country.charAt(0).toUpperCase() + this.state.country.slice(1);
 
     const formData = new FormData();
@@ -84,27 +84,32 @@ export default class SingleImage extends Component<any, any> {
     formData.append("caption", this.state.caption);
 
     axios
-    .post(`${config.apiUrl}/images/add`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    })
-    .then(() => {
+      .post(`${config.apiUrl}/images/add`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then(() => {
         // Show a success toast notification
         toast.success('Image uploaded successfully', {
           position: "top-right" as ToastPosition,
         });
-    })
-    .catch((error) => {
-      console.error(error);
-      this.setState({
-        message: "There was an error uploading the image.",
-        messageType: "error",
-      });
-    });
-  } 
+      })
+      .catch((error) => {
+        // Show an error toast notification
+        toast.error("There was an error uploading the image.", {
+          position: "top-right" as ToastPosition,
+        });
 
-  render() {    
+        console.error(error);
+        this.setState({
+          message: "There was an error uploading the image.",
+          messageType: "error",
+        });
+      });
+  }
+
+  render() {
 
     return (
       <div>
@@ -117,11 +122,10 @@ export default class SingleImage extends Component<any, any> {
 
               {this.state.message && (
                 <div
-                  className={`${
-                    this.state.messageType === "success"
+                  className={`${this.state.messageType === "success"
                       ? "bg-green-100 text-green-800"
                       : "bg-red-100 text-red-800"
-                  } p-4 mb-4 rounded-md`}
+                    } p-4 mb-4 rounded-md`}
                 >
                   {this.state.message}
                 </div>
@@ -184,8 +188,8 @@ export default class SingleImage extends Component<any, any> {
                     value={this.state.country}
                     onChange={this.onChangeCountry}
                   />
-                </div> 
-                
+                </div>
+
                 <div className="mb-4">
                   <label className="block text-gray-700 text-sm font-bold mb-2">
                     Region:

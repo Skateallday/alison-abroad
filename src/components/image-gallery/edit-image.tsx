@@ -55,7 +55,7 @@ const EditImage = ({ galleries, setGalleries }: { galleries: ImagesProps[]; setG
         setGalleries(prevGalleries => prevGalleries.filter(image => image._id !== imageId));
       })
       .catch((error) => {
-        toast.success('Error deleting image:' + error.message, {
+        toast.error('Error deleting image:' + error.message, {
           position: "top-right" as ToastPosition,
         });
       });
@@ -78,6 +78,10 @@ const EditImage = ({ galleries, setGalleries }: { galleries: ImagesProps[]; setG
       });
     })
     .catch((error) => {
+      // Show an error toast notification
+      toast.error("There was an error editting the image.", {
+        position: "top-right" as ToastPosition,
+    });
       console.error('Error updating image:', error);
     });
   };
