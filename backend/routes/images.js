@@ -27,13 +27,13 @@ const fileFilter = (req, file, cb) => {
 };
 
 const imageUploadLimiter = rateLimit({
-  windowsMS: 15 * 60* 1000,
+  windowsMs: 15 * 60* 1000,
   max: 15,
   message: 'You have exceeded the 15 image uploads in 15 minutes limit!'
 });
 
 const generalLimiter = rateLimit({
-  windowsMS: 15 * 60* 1000,
+  windowsMs: 15 * 60* 1000,
   max: 100,
   message: 'You have exceeded the 100 requests in 15 minutes limit!'
 });
