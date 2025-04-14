@@ -11,12 +11,13 @@ export default class MultiImage extends Component<any, any> {
 
     
     this.state = {
-      src: String,
+      src: "",
       width: 0,
       height: 0,
       country: "",
-      subregion: String,
-      caption: String,
+      subregion: "",
+      caption: "",
+      srcName: "",
       message: "",
       messageType: "",
     };
@@ -30,27 +31,27 @@ export default class MultiImage extends Component<any, any> {
   }
 
 
-  onChangeWidth(e: React.ChangeEvent<any>) {
+  onChangeWidth(e: React.ChangeEvent<HTMLInputElement>) {
     this.setState({
-      width: parseInt(e.target.value),
+      width: parseInt(e.target.value, 10),
     });
   }
-  onChangeHeight(e: React.ChangeEvent<any>) {
+  onChangeHeight(e: React.ChangeEvent<HTMLInputElement>) {
     this.setState({
-      height: parseInt(e.target.value),
+      height: parseInt(e.target.value, 10),
     });
   }
-  onChangeCountry(e: React.ChangeEvent<any>) {
+  onChangeCountry(e: React.ChangeEvent<HTMLInputElement>) {
     this.setState({
       country :e.target.value,
     })
   }
-  onChangeSubregion(e: React.ChangeEvent<any>) {
+  onChangeSubregion(e: React.ChangeEvent<HTMLInputElement>) {
     this.setState({
       subregion: e.target.value,
     });
   }
-  onChangeCaption(e: React.ChangeEvent<any>) {
+  onChangeCaption(e: React.ChangeEvent<HTMLInputElement>) {
     this.setState({
       caption: e.target.value,
     });

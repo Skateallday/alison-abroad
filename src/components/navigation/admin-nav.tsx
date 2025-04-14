@@ -71,7 +71,7 @@ export default function AdminNavBar() {
                                 <Link to="/create-image">NEW</Link>
                             </li>
                             <li className="text-white font-bold hover:text-blue-600">
-                                <Link to={`/edit/123`}>EDIT</Link> {/* Example dynamic ID */}
+                                <Link to={`/edit/123`}>EDIT</Link> {}
                             </li>
                             <li className="text-red-600 font-bold hover:text-blue-600">
                                 <Logout />

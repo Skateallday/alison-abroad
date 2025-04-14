@@ -16,6 +16,7 @@ const isAuthenticated = () => {
 
   // Check if the token exists
   return token !== null;}
+  
   const ProtectedRoute: React.FC<{ element: React.ReactNode, path: string }> = ({ element, path }) => {
     if (isAuthenticated()) {
       return <>{element}</>; // Render the protected component directly
