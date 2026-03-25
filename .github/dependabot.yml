@@ -17,9 +17,9 @@ updates:
     labels:
       - "dependencies"
     assignees:
-      - "your-github-username"
+      - "Skateallday"
     reviewers:
-      - "your-github-username"
+      - "Skateallday"
     rebase-strategy: "auto"
     versioning-strategy: "increase"
 
