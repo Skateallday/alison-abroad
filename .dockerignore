@@ -1,0 +1,11 @@
+node_modules
+backend/node_modules
+build
+backend/build
+npm-debug.log
+yarn-error.log
+.git
+.gitignore
+Dockerfile*
+docker-compose*.yml
+.env
