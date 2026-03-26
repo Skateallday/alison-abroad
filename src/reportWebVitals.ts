@@ -13,3 +13,6 @@ const reportWebVitals = (onPerfEntry?: ReportHandler) => {
 };
 
 export default reportWebVitals;
+const reportWebVitals = () => {};
+
+export default reportWebVitals;
