@@ -70,6 +70,7 @@
     "@babel/preset-env": "^7.26.9",
     "@babel/preset-react": "^7.26.3",
     "@babel/preset-typescript": "^7.26.0",
+    "@tailwindcss/postcss": "^4.2.2",
     "@types/babel__core": "^7.20.5",
     "@types/isotope-layout": "^3.0.9",
     "@types/multer": "^1.4.7",
