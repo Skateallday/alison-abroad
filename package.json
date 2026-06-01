@@ -66,10 +66,10 @@
     ]
   },
   "devDependencies": {
-    "@babel/core": "^7.29.0",
-    "@babel/preset-env": "^7.29.2",
-    "@babel/preset-react": "^7.28.5",
-    "@babel/preset-typescript": "^7.28.5",
+    "@babel/core": "^7.29.7",
+    "@babel/preset-env": "^7.29.7",
+    "@babel/preset-react": "^7.29.7",
+    "@babel/preset-typescript": "^7.29.7",
     "@types/babel__core": "^7.20.5",
     "@types/isotope-layout": "^3.0.15",
     "@types/multer": "^2.1.0",
@@ -77,9 +77,9 @@
     "@types/react-dom": "^19.2.3",
     "@types/react-responsive-masonry": "^2.7.0",
     "@types/react-simple-maps": "^3.0.0",
-    "autoprefixer": "^10.4.27",
-    "postcss": "^8.5.8",
-    "tailwindcss": "^4.2.2",
-    "webpack": "^5.105.4"
+    "autoprefixer": "^10.5.0",
+    "postcss": "^8.5.15",
+    "tailwindcss": "^4.3.0",
+    "webpack": "^5.107.2"
   }
 }
