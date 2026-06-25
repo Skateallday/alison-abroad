@@ -55,7 +55,7 @@ const ImageGallery: React.FC = () => {
   };
 
   const handleSubregionChange = (selectSubregion: string) => {
-    setCountry(selectSubregion);
+    setsubregion(selectSubregion);
   };
 
   return (

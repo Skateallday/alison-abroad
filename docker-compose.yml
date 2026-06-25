@@ -29,6 +29,5 @@ services:
       # - REACT_APP_API_URL=http://localhost:5000
     volumes:
       - ./:/app
-      - /app/node_modules
     depends_on:
       - api
