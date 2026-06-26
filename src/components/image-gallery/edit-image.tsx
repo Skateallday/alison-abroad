@@ -15,7 +15,7 @@ const GalleryImage = (props: ImagesProps & { handleDeleteImage: (imageId: string
   return (
     <tr>
       <td>
-        <img alt="Edit Images" className="object-scale-down h-48 w-96" src={`${config.apiUrl}/${props.src}`} />
+        <img alt="Edit Images" className="object-scale-down h-48 w-96" src={`${config.apiUrl}/images/${props.src}`} />
       </td>
       <td><input type="text" value={editedCountry} onChange={(e) => setEditedCountry(e.target.value)} /></td>
       <td><input type="text" value={editedSubregion} onChange={(e) => setEditedSubregion(e.target.value)} /></td>
@@ -71,15 +71,18 @@ const EditImage = ({ galleries, setGalleries }: { galleries: ImagesProps[]; setG
     })
     .then((response) => {
       console.log('Image updated successfully');
-      // You may want to update the state with the updated image data.
       // Show a success toast notification
       toast.success('Image updated successfully', {
         position: "top-right" as ToastPosition,
       });
+      setGalleries(prev => prev.map(img =>
+        img._id === imageId ? { ...img, caption: editedCaption, country: editedCountry, subregion: editedSubregion}
+        : img
+      ));
     })
     .catch((error) => {
       // Show an error toast notification
-      toast.error("There was an error editting the image.", {
+      toast.error("There was an error editing the image.", {
         position: "top-right" as ToastPosition,
     });
       console.error('Error updating image:', error);

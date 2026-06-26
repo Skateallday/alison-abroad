@@ -53,7 +53,6 @@ const TravelMap: React.FC = () => {
 
           {/* Render Markers for each country */}
           {uniqueCountryData.map((countryData) => {
-            console.log("Rendering Marker for:", countryData.country);
             const marker = markers.find(
               (marker) => marker.text === countryData.country
             );
@@ -64,7 +63,7 @@ const TravelMap: React.FC = () => {
                   key={countryData.country}
                   coordinates={marker.coordinates}
                 >
-                  <circle r={countryData.count} fill={marker.fill} />
+                  <circle r={Math.sqrt(countryData.count) * 5} fill={marker.fill} />
                   <text
                     textAnchor="start"
                     y={-15}

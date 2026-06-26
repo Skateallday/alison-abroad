@@ -5,6 +5,12 @@ import { v4 as uuidv4 } from 'uuid';
 import path from 'path';
 import Image from '../models/images.models.js';
 
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 const router = Router();
 
 
@@ -27,13 +33,13 @@ const fileFilter = (req, file, cb) => {
 };
 
 const imageUploadLimiter = rateLimit({
-  windowsMs: 15 * 60* 1000,
+  windowMs: 15 * 60* 1000,
   max: 15,
   message: 'You have exceeded the 15 image uploads in 15 minutes limit!'
 });
 
 const generalLimiter = rateLimit({
-  windowsMs: 15 * 60* 1000,
+  windowMs: 15 * 60* 1000,
   max: 100,
   message: 'You have exceeded the 100 requests in 15 minutes limit!'
 });
