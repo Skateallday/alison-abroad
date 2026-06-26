@@ -8,8 +8,6 @@ services:
     environment:
       - NODE_ENV=development
       - PORT=5000
-      # Put your Atlas connection string in an .env file and uncomment:
-      # - MONGO_URI=${MONGO_URI}
     volumes:
       - ./backend:/app
       - /app/node_modules
@@ -23,11 +21,12 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=development
-      # Helps hot reload in Docker (especially Mac/Windows)
+      - HOST=0.0.0.0
+      - PORT=3000
       - CHOKIDAR_USEPOLLING=true
-      # If you call your API via relative paths, you can proxy:
-      # - REACT_APP_API_URL=http://localhost:5000
+      - WATCHPACK_POLLING=true
     volumes:
       - ./:/app
+      - /app/node_modules  # ✅ add this
     depends_on:
       - api

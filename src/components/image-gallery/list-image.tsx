@@ -36,7 +36,7 @@ const ImagesList = ({ subregion }: ImagesListProps) => {
 
   // Filter images based on selected subregion
   const filteredImages = galleries.filter((image) => image.subregion === subregion).map((image) => ({
-      src: `${config.apiUrl}/${image.src}`,
+      src: `${config.apiUrl}/images/${image.src}`,
       width: image.width,
       height: image.height,
       caption: image.country,
