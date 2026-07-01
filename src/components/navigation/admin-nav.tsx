@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom'
 import Logout from "../login/logout";
 import "./nav.css";
 
-export default function AdminNavBar() {
+export default function AdminNavBar({ onLogout } : { onLogout: () => void}) {
     const [navbar, setNavbar] = useState(false);
 
     // Check if the user is authenticated
+
     const isAuthenticated = () => {
         const token = localStorage.getItem("jwtToken");
         return token !== null;
@@ -73,7 +74,7 @@ export default function AdminNavBar() {
                                 <Link to={`/edit`}>EDIT</Link> 
                             </li>
                             <li className="text-red-600 font-bold hover:text-blue-600">
-                                <Logout />
+                                <Logout onLogout={onLogout}/>
                             </li>
                         </ul>
                     </div>

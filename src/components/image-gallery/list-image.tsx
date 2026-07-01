@@ -39,7 +39,7 @@ const ImagesList = ({ subregion }: ImagesListProps) => {
       src: `${config.apiUrl}/images/${image.src}`,
       width: image.width,
       height: image.height,
-      caption: image.country,
+      caption: image.caption,
       subregion: image.subregion
 
   }));
@@ -57,14 +57,14 @@ return (
 
             <ImageList variant="masonry" cols={3} gap={8}>
               {filteredImages.map((item, index) => (
-                <ImageListItem key={index}>
+                <ImageListItem key={item._id}>
                   <img
                     src={`${item.src}?w=248&fit=crop&auto=format`}
                     alt={item.caption}
                     loading="lazy"
                   />
                             <ImageListItemBar
-            title={item.subregion}
+            title={item.caption}
           />
               </ImageListItem>
             ))}

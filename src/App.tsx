@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css'
 import { BrowserRouter } from 'react-router-dom'
 //import Navigation from './components/routes/routes';
@@ -11,13 +11,17 @@ import footer from './components/footer/footer'
 
 function App() {
 
+  const [isAuth, setIsAuth] = useState(
+    localStorage.getItem("jwtToken") !== null
+  )
+
 
   return (
     <div className="App">            
 
         <BrowserRouter>
-        <AdminNavBar />
-        <NavBar />
+        {isAuth ? <AdminNavBar onLogout={() => setIsAuth(false)} /> : <NavBar/>}
+        
 
           <Navigation />
 
