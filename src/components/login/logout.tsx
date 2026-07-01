@@ -1,12 +1,17 @@
-import React from 'react';
 import { useNavigate} from 'react-router-dom';
 
-const Logout = () => {
+type LogoutProps = {
+    onLogout: () => void;
+}
+
+export default function Logout({onLogout}:LogoutProps) {
     const navigate = useNavigate();
 
     // Handle logout funct
     const handleLogout = () => {
         localStorage.removeItem('jwtToken');
+
+        onLogout();
 
         navigate('/home');
     };
@@ -17,5 +22,3 @@ const Logout = () => {
         </div>
     )
 };
-
-export default Logout;
