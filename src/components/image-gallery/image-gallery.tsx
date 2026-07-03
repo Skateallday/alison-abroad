@@ -3,10 +3,6 @@ import ImagesList from "./list-image";
 import { getImages } from "../api/getImages";
 import { ImagesProps } from "../interfaces/images"
 
-interface Image {
-  country: string;
-  subregion: string;
-}
 
 const ImageGallery: React.FC = () => {
   const [country, setCountry] = useState<string>("Scotland");
@@ -19,7 +15,7 @@ const ImageGallery: React.FC = () => {
 
   useEffect(() => {
       getImages()
-      .then((response : { data: ImageProps[] }) => {
+      .then((response : { data: ImagesProps[] }) => {
         setImages(response.data)
         console.log(response.data); // Log the data property
 
@@ -51,7 +47,7 @@ const ImageGallery: React.FC = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  });
 
   const handleCountryChange = (selectedCountry: string) => {
     setCountry(selectedCountry);
