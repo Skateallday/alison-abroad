@@ -41,7 +41,7 @@ export default class Register extends Component <any, any> {
         console.log(data);
     
         axios
-            .post('http://localhost:5000/users/register', data)
+            .post(`${config.apiUrl}/users/register`, data)
             .then(res => {
                 console.log(res.data);
                 this.setState({successReg : true})
