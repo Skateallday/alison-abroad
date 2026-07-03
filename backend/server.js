@@ -25,18 +25,31 @@ app.set('trust proxy', 1); // trust first proxy
 
 
 const port = process.env.PORT || 5000;
+
 const generalLimiter = rateLimit({
   windowsMs: 15 * 60* 1000,
   max: 500,
   message: 'You have exceeded the 5 requests in 15 minutes limit!'
 });
 
+const allowedOrigins = [
+  'http://localhost:3000',
+  process.env.CLIENT_URL
+];
+
 app.use(cors({
-  /*origin: 'https://alison-abroad.onrender.com',*/
-  origin: 'http://localhost:3000',
-  methods: 'GET, POST, PUT, DELETE',
-  credentials: true, // Enable sending cookies across origins
-}));
+  origin: function (origin, callback){
+    if (!origin) return this.callback(null, true);
+
+    if (allowedOrigins.includes(origin)){
+      return callback(null, true)
+    }
+
+    return callback(new Error(`CORS blocked for origin: ${origin}`))
+  },
+  methods:['GET', 'POST', 'PUT', 'DELETEs'],
+  credentials: true,
+}))
 
 app.use(express.json());
 
@@ -63,9 +76,12 @@ app.use('/users', usersRouter);
 app.use('/images', imageRouter);
 
 // Middleware for handling client-side routing (MUST be before app.listen)
-app.get('*', generalLimiter, (req, res) => {
-  res.type('text/html'); // Set the MIME type explicitly
-  res.sendFile(path.join(__dirname, '../build', 'index.html'));
+app.get('/', (req, res) => {
+  res.json({ message: 'Alison Abroad API is running' });
+});
+
+app.use((req, res) => {
+  res.status(404).json({ message: 'API route not found' });
 });
 
 // Start Server
