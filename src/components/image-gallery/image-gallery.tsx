@@ -1,23 +1,22 @@
 import React, { useState, useEffect } from "react";
 import ImagesList from "./list-image";
 import { getImages } from "../api/getImages";
+import { ImagesProps } from "../interfaces/images"
 
-interface Image {
-  country: string;
-  subregion: string;
-}
 
 const ImageGallery: React.FC = () => {
   const [country, setCountry] = useState<string>("Scotland");
   const [countries, setCountries] = useState<string[]>([]);
-  const [subregion, setsubregion ] = useState<string>("Glasgow");
-  const [subregions, setsubregions] = useState<string[]>([]);
+  const [subregion, setSubregion ] = useState<string>("Glasgow");
+  const [subregions, setSubregions] = useState<string[]>([]);
+  const [images, setImages]= useState<ImagesProps[]>([]);
 
 
 
   useEffect(() => {
       getImages()
-      .then((response : {data: Image[]}) => {
+      .then((response : { data: ImagesProps[] }) => {
+        setImages(response.data)
         console.log(response.data); // Log the data property
 
         const countriesArray = response.data
@@ -43,19 +42,26 @@ const ImageGallery: React.FC = () => {
         return uniquesubregions;
       }, [])
       .map((subregion) => subregion.charAt(0).toUpperCase() + subregion.slice(1));
-      setsubregions(subregionsArray);
+      setSubregions(subregionsArray);
   })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  });
 
-  const handleCountryChange = (selectCountry: string) => {
-    setCountry(selectCountry);
+  const handleCountryChange = (selectedCountry: string) => {
+    setCountry(selectedCountry);
+      const newSubregions = images
+      .filter((image) => image.country === selectedCountry)
+      .map((image) => image.subregion)
+      .filter((subregion, index, array) => array.indexOf(subregion) === index);
+
+      setSubregions(newSubregions);
+      setSubregion(newSubregions[0] || "" )
   };
 
   const handleSubregionChange = (selectSubregion: string) => {
-    setCountry(selectSubregion);
+    setSubregion(selectSubregion);
   };
 
   return (
@@ -70,7 +76,7 @@ const ImageGallery: React.FC = () => {
               className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded mr-4 mb-4 ${
                 country === countryOption ? "bg-blue-700" : ""
               }`}
-              onClick={() => setCountry(countryOption)}
+              onClick={() => handleCountryChange(countryOption)}
             >
               {countryOption}
             </button>
@@ -83,7 +89,7 @@ const ImageGallery: React.FC = () => {
               className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded mr-4 mb-4 ${
                 subregion === subregionOption ? "bg-blue-700" : ""
               }`}
-              onClick={() => setsubregion(subregionOption)}
+              onClick={() => handleSubregionChange(subregionOption)}
             >
               {subregionOption}
             </button>

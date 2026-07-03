@@ -7,8 +7,8 @@
       "esnext"
     ],
 
-    "types": ["react", "node"],
-    "moduleResolution": "node",
+    "types": ["react", "node", "react-scripts"],
+    "moduleResolution": "bundler",
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -20,10 +20,11 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "preserve"
+    "jsx": "react-jsx"
   },
   "include": [
     "src",
-    "backend/models/images.models.tsx"
+    "backend/models/images.models.tsx",
+    "typings.d.ts"
   ]
 }

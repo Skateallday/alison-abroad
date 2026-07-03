@@ -1,6 +1,6 @@
 //config.ts
 const config = {
-    apiUrl:'https://alison-abroad-n586.onrender.com', // Development URL
+    apiUrl: process.env.REACT_APP_API_URL || 'http://localhost:5000', // Development URL
 };
 
 export default config;

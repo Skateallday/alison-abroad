@@ -26,13 +26,14 @@ app.set('trust proxy', 1); // trust first proxy
 
 const port = process.env.PORT || 5000;
 const generalLimiter = rateLimit({
-  windowsMS: 15 * 60* 1000,
+  windowsMs: 15 * 60* 1000,
   max: 500,
   message: 'You have exceeded the 5 requests in 15 minutes limit!'
 });
 
 app.use(cors({
-  origin: 'https://alison-abroad.onrender.com',
+  /*origin: 'https://alison-abroad.onrender.com',*/
+  origin: 'http://localhost:3000',
   methods: 'GET, POST, PUT, DELETE',
   credentials: true, // Enable sending cookies across origins
 }));

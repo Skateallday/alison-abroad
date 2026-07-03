@@ -1,12 +1,13 @@
 import { useState } from "react";
-import { Link, BrowserRouter as Router } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Logout from "../login/logout";
 import "./nav.css";
 
-export default function AdminNavBar() {
+export default function AdminNavBar({ onLogout } : { onLogout: () => void}) {
     const [navbar, setNavbar] = useState(false);
 
     // Check if the user is authenticated
+
     const isAuthenticated = () => {
         const token = localStorage.getItem("jwtToken");
         return token !== null;
@@ -15,7 +16,6 @@ export default function AdminNavBar() {
     if (!isAuthenticated()) return null; // Only render if authenticated
 
     return (
-        <Router>
             <nav className="w-full bg-green-500 shadow AdminNav">
                 <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
                     <div className="flex items-center justify-between py-3 md:py-5">
@@ -71,15 +71,14 @@ export default function AdminNavBar() {
                                 <Link to="/create-image">NEW</Link>
                             </li>
                             <li className="text-white font-bold hover:text-blue-600">
-                                <Link to={`/edit/123`}>EDIT</Link> {}
+                                <Link to={`/edit`}>EDIT</Link> 
                             </li>
                             <li className="text-red-600 font-bold hover:text-blue-600">
-                                <Logout />
+                                <Logout onLogout={onLogout}/>
                             </li>
                         </ul>
                     </div>
                 </div>
             </nav>
-        </Router>
     );
 }
