@@ -18,7 +18,6 @@ const initialState = {
 
 export default function SingleImage() {
   const [formData, setFormData] = useState(initialState);
-  const [srcName, setSrcName] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -27,7 +26,6 @@ export default function SingleImage() {
 
   const handleReset = () => {
     setFormData(initialState);
-    setSrcName("");
   };
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
