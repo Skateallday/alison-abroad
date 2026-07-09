@@ -17,7 +17,7 @@ function App() {
 
 
   return (
-    <div className="App">            
+    <div className="">            
 
         <BrowserRouter>
         {isAuth ? <AdminNavBar onLogout={() => setIsAuth(false)} /> : <NavBar/>}

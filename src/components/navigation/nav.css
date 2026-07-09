@@ -2,3 +2,12 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display:block;
 }
+
+.navbar{
+    background:var(--colour-forest-green)
+}
+
+
+a{
+    color: var(--colour-white);
+}

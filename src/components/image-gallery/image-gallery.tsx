@@ -13,41 +13,40 @@ const ImageGallery: React.FC = () => {
 
 
 
-  useEffect(() => {
-      getImages()
-      .then((response : { data: ImagesProps[] }) => {
-        setImages(response.data)
-        console.log(response.data); // Log the data property
+useEffect(() => {
+  getImages()
+    .then((images) => {
+      setImages(images);
 
-        const countriesArray = response.data
-          .map((image) => image.country)
-          .reduce<string[]>((uniqueCountries, country) => {
-            // Only keep the first occurrence of the country
-            if (!uniqueCountries.includes(country)) {
-              uniqueCountries.push(country);
-            }
-            return uniqueCountries;
-          }, [])
-          .map((country) => country.charAt(0).toUpperCase() + country.slice(1));
-        setCountries(countriesArray);
-      
-      const subregionsArray = response.data
-      .filter((image) => image.country === country) // Filter images by selected country
-      .map((image) => image.subregion)
-      .reduce<string[]>((uniquesubregions, subregion) => {
-        // Only keep the first occurrence of the subregion
-        if (!uniquesubregions.includes(subregion)) {
-          uniquesubregions.push(subregion);
-        }
-        return uniquesubregions;
-      }, [])
-      .map((subregion) => subregion.charAt(0).toUpperCase() + subregion.slice(1));
+      const countriesArray = images
+        .map((image) => image.country)
+        .reduce<string[]>((uniqueCountries, country) => {
+          if (!uniqueCountries.includes(country)) {
+            uniqueCountries.push(country);
+          }
+          return uniqueCountries;
+        }, [])
+        .map((country) => country.charAt(0).toUpperCase() + country.slice(1));
+
+      setCountries(countriesArray);
+
+      const subregionsArray = images
+        .filter((image) => image.country === country)
+        .map((image) => image.subregion)
+        .reduce<string[]>((uniqueSubregions, subregion) => {
+          if (!uniqueSubregions.includes(subregion)) {
+            uniqueSubregions.push(subregion);
+          }
+          return uniqueSubregions;
+        }, [])
+        .map((subregion) => subregion.charAt(0).toUpperCase() + subregion.slice(1));
+
       setSubregions(subregionsArray);
-  })
-      .catch((error) => {
-        console.log(error);
-      });
-  });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}, []);
 
   const handleCountryChange = (selectedCountry: string) => {
     setCountry(selectedCountry);

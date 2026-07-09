@@ -4,6 +4,7 @@ import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import config from '../../config';
+import { getImages } from '../api/getImages';
 
 
 interface ImageData {
@@ -24,10 +25,10 @@ const ImagesList = ({ subregion }: ImagesListProps) => {
   const [galleries, setGalleries] = useState<ImageData[]>([]);
 
   useEffect(() => {
-    axios.get<ImageData[]>(`${config.apiUrl}/images/`)
-      .then(response => {
+    getImages()
+      .then(images => {
 
-        setGalleries(response.data);
+        setGalleries(images);
       })
       .catch((error) => {
         console.log(error);
@@ -37,6 +38,7 @@ const ImagesList = ({ subregion }: ImagesListProps) => {
   // Filter images based on selected subregion
   const filteredImages = galleries.filter((image) => image.subregion === subregion).map((image) => ({
       src: `${config.apiUrl}/images/${image.src}`,
+      _id: image._id,
       width: image.width,
       height: image.height,
       caption: image.caption,
