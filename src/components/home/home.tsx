@@ -1,7 +1,8 @@
 import './styles.css';
-import ImageFlair from '../image-flair/imageflair';
 import Header from '../header/header';
 import RunningTotals from '../runningtotals/runningtotals';
+import mountains from '../../assets/images/mountains.jpg'
+import ImagePreview from '../image-preview/imagePreview';
 
 function Home() {
   return (
@@ -11,7 +12,8 @@ function Home() {
       </header>
 
       <main>
-        <section className="left-column flex flex-col md:flex-row w-full overflow-hidden">
+        <section className="left-column">
+          <div className="row flex">
           <div className="w-full md:w-1/2 p-6 md:p-10 text-left">
             <div className="card--b">
               <span className="eyebrows">Welcome</span>
@@ -43,12 +45,22 @@ function Home() {
             </p>
           </div>
 
-          <div className="w-full md:w-1/2 overflow-hidden">
-            <ImageFlair />
+          <div className="w-full md:w-1/2 p-6 md:p-10 text-left">
+            <img
+              src={mountains}
+              alt="Alison in front of a mountain range"
+              className="h-full max-h-[600px] w-full rounded-2xl object-cover"
+            />
+          </div>
           </div>
         </section>
-        <section>
+        
+      <section className="runningStats px-4 py-2">
           <RunningTotals />
+        </section>
+
+        <section className="imagepreview px-4 py-2">
+          <ImagePreview />
         </section>
       </main>
     </div>

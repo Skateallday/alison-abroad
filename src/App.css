@@ -138,3 +138,22 @@ h6, .h6  {
   --eyebrow-bg: var(--colour-ochre);
   --eyebrow-text: var(--colour-charcoal);
 }
+
+/*round images*/
+
+.img-round{
+  border-radius: var(--radius-lg);
+}
+
+/*Spacings*/
+
+section > div{
+  	margin: 0 auto;
+    width: 92.5%;
+    padding: 1em 0;
+}
+
+
+@media only screen and (min-width: 1024px) {
+  
+}

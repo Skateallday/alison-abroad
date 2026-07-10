@@ -24,8 +24,8 @@ export default function RunningTotals() {
   }, []);
 
   return (
-    <section className="runningStats px-4 py-2">
-      
+    
+      <div className="row">
       <div className="card--a">
         <span className="eyebrows">Running statistics</span>
       </div>
@@ -59,6 +59,6 @@ export default function RunningTotals() {
         </div>
 
       </div>
-    </section>
+      </div>
   );
 }
