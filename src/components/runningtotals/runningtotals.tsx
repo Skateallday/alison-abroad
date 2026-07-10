@@ -24,45 +24,40 @@ export default function RunningTotals() {
   }, []);
 
   return (
-    <section className="px-4 py-2">
+    <section className="runningStats px-4 py-2">
+      
       <div className="card--a">
         <span className="eyebrows">Running statistics</span>
       </div>
 
       <h2>Travel Highlights</h2>
 
-      <div className="flex">
-        <div className="flex">
-          <i className="fa-solid fa-camera"></i>
+      <div className="flex w-full space-around justify-center">
+        
+        <div className="flex p-2 border-r-2 border-black">
+          <i className="fa-solid fa-camera fa-xl"></i>
           <span>
             <h3>{stats.totalPhotos}</h3>
-            <p>Photos captured</p>
+            <h4>Photos captured</h4>
           </span>
         </div>
 
-        <div className="flex">
-          <i className="fa-solid fa-earth-europe"></i>
+        <div className="flex p-2 border-r-2 border-black">
+          <i className="fa-solid fa-earth-europe fa-xl"></i>
           <span>
             <h3>{stats.totalCountries}</h3>
-            <p>Countries visited</p>
+            <h4>Countries visited</h4>
           </span>
         </div>
 
-        <div className="flex">
-          <i className="fa-solid fa-map-location-dot"></i>
+        <div className="flex p-2 ">
+          <i className="fa-solid fa-map-location-dot fa-xl"></i>
           <span>
             <h3>{stats.totalDestinations}</h3>
-            <p>Destinations explored</p>
+            <h4>Destinations explored</h4>
           </span>
         </div>
 
-        <div className="flex">
-          <i className="fa-solid fa-heart"></i>
-          <span>
-            <h3>Countless</h3>
-            <p>Memories made</p>
-          </span>
-        </div>
       </div>
     </section>
   );
