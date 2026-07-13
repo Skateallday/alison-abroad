@@ -1,5 +1,4 @@
-import React, { useState, useEffect, Suspense } from 'react';
-import axios from 'axios';
+import { useState, useEffect, Suspense } from 'react';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';

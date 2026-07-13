@@ -27,3 +27,19 @@ export const getSubregionsForCountry = (
     ),
   ];
 };
+
+
+export const getRandomCountry = (
+  images: ImagesProps[]
+): string => {
+
+  let uniqueCountries = [...new Set(images.filter((image) => image.country).map((image) =>image.country).filter(Boolean)),]
+
+  
+  let randomCountryID = Math.floor(Math.random()* uniqueCountries.length);
+
+  let chosenCountry = uniqueCountries[randomCountryID];
+
+  return chosenCountry
+  
+};
