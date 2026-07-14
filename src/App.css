@@ -73,7 +73,7 @@ h4, .h4, h5, .h5, h6, .h6 {
   font-weight: 600;
 }
 
-h1, .h1, h2, .h2, b, strong {
+h1, .h1, h2, .h2, h3, .h3, b, strong {
   font-weight: 700;
   font-family: "Merriweather", serif;
 }
@@ -155,5 +155,10 @@ section > div{
 
 
 @media only screen and (min-width: 1024px) {
-  
+  section > div{
+  	margin: 0 auto;
+    width: 100%;
+    padding: 0;
+}
+
 }

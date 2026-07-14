@@ -26,32 +26,28 @@ export default function RunningTotals() {
   return (
     
       <div className="row">
-      <div className="card--a">
-        <span className="eyebrows">Running statistics</span>
-      </div>
 
-      <h2>Travel Highlights</h2>
 
-      <div className="flex w-full space-around justify-center">
+      <div className=" runningStats flex w-full space-around justify-center border border-black rounded-lg py-4">
         
-        <div className="flex p-2 border-r-2 border-black">
-          <i className="fa-solid fa-camera fa-xl"></i>
+        <div className="flex items-center p-4 border-r border-black">
+          <i className="fa-solid fa-camera fa-xl px-4"></i>
           <span>
             <h3>{stats.totalPhotos}</h3>
             <h4>Photos captured</h4>
           </span>
         </div>
 
-        <div className="flex p-2 border-r-2 border-black">
-          <i className="fa-solid fa-earth-europe fa-xl"></i>
+        <div className="flex items-center p-4 border-r border-black">
+          <i className="fa-solid fa-earth-europe fa-xl px-4"></i>
           <span>
             <h3>{stats.totalCountries}</h3>
             <h4>Countries visited</h4>
           </span>
         </div>
 
-        <div className="flex p-2 ">
-          <i className="fa-solid fa-map-location-dot fa-xl"></i>
+        <div className="flex items-center p-2 ">
+          <i className="fa-solid fa-map-location-dot fa-xl px-4"></i>
           <span>
             <h3>{stats.totalDestinations}</h3>
             <h4>Destinations explored</h4>

@@ -1,39 +1,50 @@
-import "./styles.css"
-import {useState, useEffect} from 'react'
-import PreviewCard from "./preview-card"
-import { getImages } from "../api/getImages"
-import { ImagesProps } from "../interfaces/images"
-import { getRandomCountry, getSubregionsForCountry } from "../utils/imageFilters"
-import { getOptimisedImageUrl } from "../utils/imageUrls"
+import "./styles.css";
+import { useState, useEffect } from "react";
+import PreviewCard from "./preview-card";
+import { getImages } from "../api/getImages";
+import {
+    buildPreviewBundle,
+  getRandomCountries,
+} from "../utils/imageFilters";
 
-export default function ImagePreview(){
+interface PreviewBundle{
+    country:string;
+    region: string;
+    image: string;
+}
 
-    const [country, setCountry] = useState<string>("Scotland");
-    const [region, setSubregion ] = useState<string>("Glasgow");      
-    const [image, setImage]= useState<string>("");
+export default function ImagePreview() {
+  const [previews, setPreviews] = useState<PreviewBundle[]>([]);
 
-    useEffect(() => {
-      getImages()
-        .then((images) => {
-            const randomCountry = getRandomCountry(images)
-            const subregions = getSubregionsForCountry(images, randomCountry)
-            const imageUrl = getOptimisedImageUrl(images[0].src)
+  useEffect(() => {
+    getImages()
+      .then((images) => {
+        const randomCountry = getRandomCountries(images);
+        const bundle = randomCountry.map((country) =>
+            buildPreviewBundle(images, country)
+    );        
 
-
-            setImage(imageUrl)
-            setCountry(randomCountry)
-            setSubregion(subregions[0])
-    })
-    .catch((error) => {
+        setPreviews(bundle);
+        
+      })
+      .catch((error) => {
         console.log(error);
-    });}, []);
+      });
+  }, []);
 
+  return (
+    <section className="image-preview">
+      <h2 className="">Destination preview</h2>
+      <div className="flex flex-row">
+        {previews.map((preview) =>(
 
-    return(
-        <>
-        <p>Image preview</p>
-
-        <PreviewCard image={image} country={country} region={region}/>    
-        </>
-    )
+        <PreviewCard 
+            key={preview.country}
+            image={preview.image} 
+            country={preview.country} 
+            region={preview.region} />
+        ))}
+      </div>
+    </section>
+  );
 }

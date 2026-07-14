@@ -14,7 +14,7 @@ const TravelMap: React.FC = () => {
   }, []);
 
   return (
-    <div className="bg-gray-700 grid grid-cols-2 md:grid-cols-2">
+    <div className="bg-blue-400  grid grid-cols-2 md:grid-cols-2">
       <div>
         <h1 className="text-2xl text-left text-white py-8 px-4">Explore Alison's Interactive Travel Map</h1>
 
@@ -36,7 +36,7 @@ const TravelMap: React.FC = () => {
             center: [0, 54], // Center of the map on initial load
           }}
           width={800}
-          height={700}
+          height={800}
         >
           <Geographies geography={geoUrl}>
             {({ geographies }: any) =>

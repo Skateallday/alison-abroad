@@ -55,11 +55,19 @@ function Home() {
           </div>
         </section>
         
-      <section className="runningStats px-4 py-2">
+      <section className="runningStats px-10 py-10">
+              <div className="card--a">
+        <span className="eyebrows">Running statistics</span>
+      </div>
+
+      <h2 className="pb-6">Travel highlights</h2>
           <RunningTotals />
         </section>
 
-        <section className="imagepreview px-4 py-2">
+        <section className="imagepreview px-10 py-10">
+          <div className="card--b">
+              <span className="eyebrows">A glimpse abroad</span>
+              </div>
           <ImagePreview />
         </section>
       </main>
