@@ -35,7 +35,7 @@ export default function ImagePreview() {
   return (
     <section className="image-preview">
       <h2 className="">Destination preview</h2>
-      <div className="flex flex-row">
+      <div className="flex flex-col md:flex-row ">
         {previews.map((preview) =>(
 
         <PreviewCard 

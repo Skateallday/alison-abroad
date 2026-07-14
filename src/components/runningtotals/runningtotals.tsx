@@ -28,9 +28,9 @@ export default function RunningTotals() {
       <div className="row">
 
 
-      <div className=" runningStats flex w-full space-around justify-center border border-black rounded-lg py-4">
+      <div className="runningStats flex  flex-col md:flex-row  w-full space-around justify-center border border-black rounded-lg py-4">
         
-        <div className="flex items-center p-4 border-r border-black">
+        <div className="flex items-center p-4  md:border-r border-black">
           <i className="fa-solid fa-camera fa-xl px-4"></i>
           <span>
             <h3>{stats.totalPhotos}</h3>
@@ -38,7 +38,7 @@ export default function RunningTotals() {
           </span>
         </div>
 
-        <div className="flex items-center p-4 border-r border-black">
+        <div className="flex items-center p-4  md:border-r border-black">
           <i className="fa-solid fa-earth-europe fa-xl px-4"></i>
           <span>
             <h3>{stats.totalCountries}</h3>

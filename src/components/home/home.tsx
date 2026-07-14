@@ -13,7 +13,7 @@ function Home() {
 
       <main>
         <section className="left-column">
-          <div className="row flex">
+          <div className="flex flex-col md:flex-row">
           <div className="w-full md:w-1/2 p-6 md:p-10 text-left">
             <div className="card--b">
               <span className="eyebrows">Welcome</span>
@@ -55,7 +55,7 @@ function Home() {
           </div>
         </section>
         
-      <section className="runningStats px-10 py-10">
+      <section className="runningStats p-6 md:p-10">
               <div className="card--a">
         <span className="eyebrows">Running statistics</span>
       </div>
@@ -64,7 +64,7 @@ function Home() {
           <RunningTotals />
         </section>
 
-        <section className="imagepreview px-10 py-10">
+        <section className="imagepreview p-6 md:p-10">
           <div className="card--b">
               <span className="eyebrows">A glimpse abroad</span>
               </div>
