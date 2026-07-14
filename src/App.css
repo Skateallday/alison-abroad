@@ -1,23 +1,164 @@
 @import "~react-image-gallery/styles/css/image-gallery.css";
 
-.App {
-  text-align: center;
-  width: 100vw;
+
+:root{
+
+  /*===============================
+  //	Colours
+  ===============================*/
+
+  --colour-deep-forest-green: #183524;
+  --colour-forest-green: #254d32;
+  --colour-moss-green: #5c7c46;
+  --colour-ochre: #c9973a;
+
+  --colour-warm-white: #faf8f1;
+  --colour-stone: #e6ded0;
+  --colour-clay: #a65f3f;
+
+  --colour-charcoal: #25251f;
+  --colour-white: #ffffff;
+
+  /* -------------------------------------
+     Radius
+     ------------------------------------- */
+
+  --radius-sm: 0.5rem;   /* eyebrow pills, tags */
+  --radius-md: 0.75rem;  /* buttons, inputs */
+  --radius-lg: 1rem;     /* cards, panels */
+
+    --weight-regular: 400;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* Balanced clamp scale (rem-based) */
+  --text-xs: clamp(0.75rem, 0.72rem + 0.15vw, 0.8125rem);
+  --text-sm: clamp(0.875rem, 0.84rem + 0.18vw, 0.9375rem);
+  --text-base: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
+  --text-md: clamp(1.125rem, 1.06rem + 0.28vw, 1.25rem);
+  --text-lg: clamp(1.25rem, 1.16rem + 0.36vw, 1.5rem);
+  --text-xl: clamp(1.5rem, 1.60rem + 0.75vw, 2rem);
+  --text-2xl: clamp(1.875rem, 1.64rem + 0.85vw, 2.375rem);
+  --text-3xl: clamp(2.375rem, 2rem + 1.25vw, 3.125rem);
+
+}
+
+/*===============================
+//	TYPOGRAPHY
+===============================*/
+
+//family
+
+body, html {
+  font-family: "Montserrat";;
+  font-size: 16px;
+  line-height: 1.4;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+}
+
+//weight
+.fal {
+  font-weight: 300;
+}
+
+body, h3, .h3, .far, .related-links h3 {
+  font-weight: 400;
+}
+
+h4, .h4, h5, .h5, h6, .h6 {
+  font-weight: 600;
+}
+
+h1, .h1, h2, .h2, h3, .h3, b, strong {
+  font-weight: 700;
+  font-family: "Merriweather", serif;
+}
+
+.bigger strong, .medium strong {
+  font-weight: 800;
 }
 
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+//sizes
+a:not(.wp-element-button) {
+  font-size: unset;
 }
 
-.App-link {
-  color: #61dafb;
+h1, .h1 {
+  font-size:clamp(2rem, 4vw, 3rem);
 }
 
+h2, .h2, .bigger {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+h3, .h3{
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+h4, .h4, h5, .h5 {
+  font-size: clamp(1rem, 1.05rem, 1.125rem);
+}
+
+h6, .h6  {
+  font-size: clamp(0.875rem, 1vw, 1rem);
+}
+
+.eyebrows{
+      display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius-sm);
+    font-size: var(--text-sm);
+    line-height: 1;
+    background: var(--eyebrow-bg, var(--surface-2));
+    color: var(--eyebrow-text, var(--text));
+    margin-bottom: 15px;
+    font-weight:600;
+}
+
+/* Them A: Green forest*/
+.card--a {
+  --card-bg: var(--colour-warm-white);
+  --card-border: var(--colour-moss-green);
+
+  --eyebrow-bg: var(--colour-moss-green);
+  --eyebrow-text: var(--colour-white);
+}
+
+/* Theme B: Ochre clay */
+.card--b {
+  --card-bg: var(--colour-stone);
+  --card-border: var(--colour-clay);
+
+  --eyebrow-bg: var(--colour-ochre);
+  --eyebrow-text: var(--colour-charcoal);
+}
+
+/*round images*/
+
+.img-round{
+  border-radius: var(--radius-lg);
+}
+
+/*Spacings*/
+
+section > div{
+  	margin: 0 auto;
+    width: 92.5%;
+    padding: 1em 0;
+}
+
+
+@media only screen and (min-width: 1024px) {
+  section > div{
+  	margin: 0 auto;
+    width: 100%;
+    padding: 0;
+}
+
+}

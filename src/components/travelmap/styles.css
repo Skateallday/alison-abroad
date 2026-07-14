@@ -1,7 +1,7 @@
 
 circle { 
-    fill:#F53;
-    stroke:#FFF;
+    fill:var(--colour-ochre);
+    stroke:var(--colour-white);
     transition: all .2s ease-in-out;
  }
 
@@ -17,7 +17,7 @@ circle:hover{
  }
 
  .text{
-     fill:#E9F0C7;
+     fill:var(--colour-warm-white);
      font-weight: bolder;
  }
 

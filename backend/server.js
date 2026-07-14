@@ -27,7 +27,7 @@ app.set('trust proxy', 1); // trust first proxy
 const port = process.env.PORT || 5000;
 
 const generalLimiter = rateLimit({
-  windowsMs: 15 * 60* 1000,
+  windowMs: 15 * 60* 1000,
   max: 500,
   message: 'You have exceeded the 5 requests in 15 minutes limit!'
 });
@@ -39,7 +39,7 @@ const allowedOrigins = [
 
 app.use(cors({
   origin: function (origin, callback){
-    if (!origin) return this.callback(null, true);
+    if (!origin) return callback(null, true);
 
     if (allowedOrigins.includes(origin)){
       return callback(null, true)
@@ -47,7 +47,7 @@ app.use(cors({
 
     return callback(new Error(`CORS blocked for origin: ${origin}`))
   },
-  methods:['GET', 'POST', 'PUT', 'DELETEs'],
+  methods:['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
 }))
 
