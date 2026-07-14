@@ -47,7 +47,6 @@
 //	TYPOGRAPHY
 ===============================*/
 
-//family
 
 body, html {
   font-family: "Montserrat";;
@@ -60,7 +59,6 @@ a {
   text-decoration: none;
 }
 
-//weight
 .fal {
   font-weight: 300;
 }
@@ -83,7 +81,6 @@ h1, .h1, h2, .h2, h3, .h3, b, strong {
 }
 
 
-//sizes
 a:not(.wp-element-button) {
   font-size: unset;
 }
