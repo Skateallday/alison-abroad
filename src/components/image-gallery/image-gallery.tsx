@@ -11,6 +11,7 @@ const ImageGallery: React.FC = () => {
   const [subregion, setSubregion] = useState<string>("Glasgow");
   const [subregions, setSubregions] = useState<string[]>([]);
   const [images, setImages] = useState<ImagesProps[]>([]);
+  const [display, setDisplay] = useState(false);
 
   useEffect(() => {
     getImages()
@@ -50,6 +51,10 @@ const ImageGallery: React.FC = () => {
       });
   }, [country]);
 
+  const handleHideShow = () => {
+    setDisplay(!display);
+  };
+
   const handleCountryChange = (selectedCountry: string) => {
     setCountry(selectedCountry);
     const newSubregions = images
@@ -66,10 +71,10 @@ const ImageGallery: React.FC = () => {
   };
 
   return (
-    <section className="image-gallery pb-4">
-      <div className="image-gallery-intro text-white w-full flex p-4 border-b border-black">
-        <div>
-          <h1 className="text-white">Image Gallery</h1>
+    <section className="image-gallery  pb-4">
+      <div className="image-gallery-intro px-10 text-white w-full flex flex-col md:flex-row  p-4 border-b border-black">
+        <div className="pr-10">
+          <h1 className="text-white py-4">Image Gallery</h1>
           <p className="text-white">
             Alison is a keen photographer who has an unwavering passion for
             capturing the beauty of stunning locations during her travels. Her
@@ -80,43 +85,59 @@ const ImageGallery: React.FC = () => {
             the captivating charm of this remarkable place.
           </p>
         </div>
-        <RunningTotals />
+        <div className="py-10"><RunningTotals /></div>
       </div>
       <div className="flex flex-col md:flex-row">
         <div className="w-full flex-auto">
-          <div className="flex">
-            <div className="w-1/6  border-r border-black">
-              <h2 className="p-4 border-b border-black">Filters</h2>
-              <div className="flex flex-wrap p-4 border-b border-black">
-                <h3>Country</h3>
-                {countries.map((countryOption) => (
-                  <button
-                    key={countryOption}
-                    className={`bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 border border-green-700 rounded mr-4 mb-4 ${
-                      country === countryOption ? "bg-green-700" : ""
-                    }`}
-                    onClick={() => handleCountryChange(countryOption)}
-                  >
-                    {countryOption}
-                  </button>
-                ))}
+          <div className="flex flex-col md:flex-row ">
+            <div className="w-full md:w-1/6  md:border-r border-black">
+              <div className="p-4 border-b border-black">
+                <h2 className="pb-2">Filters</h2>
+                <button
+                  className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 border border-green-700 rounded mr-4 mb-4"
+                  onClick={handleHideShow}
+                >
+                  {display ? <p>Hide filters</p> : <p>Show filters</p>}
+                </button>
               </div>
-              <div className="flex flex-wrap p-4">
-                <h3>Region</h3>
-                {subregions.map((subregionOption) => (
-                  <button
-                    key={subregionOption}
-                    className={`bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 border border-green-700 rounded mr-4 mb-4 ${
-                      subregion === subregionOption ? "bg-green-700" : ""
-                    }`}
-                    onClick={() => handleSubregionChange(subregionOption)}
-                  >
-                    {subregionOption}
-                  </button>
-                ))}
-              </div>
+              {display ? (
+                <>
+                  <div className="flex flex-col md:flex-row  md:flex-wrap p-4 border-b border-black">
+                    <h3 className="py-4">Country</h3>
+                    <div>
+                      {countries.map((countryOption) => (
+                        <button
+                          key={countryOption}
+                          className={`bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 border border-green-700 rounded mr-4 mb-4 ${
+                            country === countryOption ? "bg-green-700" : ""
+                          }`}
+                          onClick={() => handleCountryChange(countryOption)}
+                        >
+                          {countryOption}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex flex-col md:flex-row md:flex-wrap p-4 border-b border-black">
+                    <h3 className="py-4">Region</h3>
+                    <div>
+                      {subregions.map((subregionOption) => (
+                        <button
+                          key={subregionOption}
+                          className={`bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 border border-green-700 rounded mr-4 mb-4 ${
+                            subregion === subregionOption ? "bg-green-700" : ""
+                          }`}
+                          onClick={() => handleSubregionChange(subregionOption)}
+                        >
+                          {subregionOption}
+                        </button>
+                      ))}
+                    </div>
+                  </div>{" "}
+                </>
+              ) : null}
             </div>
-            <div className="w-5/6 p-5">
+            <div className="w-full md: w-5/6 p-5">
               <div className="relative image-gallery">
                 <div className="py-5 flex content-center w-full ">
                   <h2 className=" px-4">{country}</h2>

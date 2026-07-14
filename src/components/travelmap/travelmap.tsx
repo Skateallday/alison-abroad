@@ -14,8 +14,8 @@ const TravelMap: React.FC = () => {
   }, []);
 
   return (
-    <div className="bg-blue-400  grid grid-cols-2 md:grid-cols-2">
-      <div>
+    <div className="bg-blue-400 flex flex-col md:flex-row">
+      <div className="w-full md:w-1/2 p-6 md:p-10 text-left">
         <h1 className="text-2xl text-left text-white py-8 px-4">Explore Alison's Interactive Travel Map</h1>
 
         <p className="text-left text-white py-1 px-4">
@@ -28,7 +28,7 @@ const TravelMap: React.FC = () => {
           connect with different places and cultures.
         </p>
       </div>
-      <div>
+      <div className="w-full md:w-1/2  text-left">
         <ComposableMap
           projection="geoMercator"
           projectionConfig={{
